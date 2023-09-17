@@ -1,21 +1,22 @@
 <?php
 //Modelo para Jogadores
 require_once(__DIR__ . "/FavPosicao.php");
-require_once(__DIR__ . "/Clubes.php");
+require_once(__DIR__ . "/Clube.php");
 
-class Jogadores {
+class Jogador {
 
     private ?int $id;
-    private ?string $nome;
+    private ?string $nomeJogador;
     private ?int $nascimento;
     private ?string $numero;
-    private ?string $nome_uniforme;
+    private ?string $nomeUniforme;
     private ?string $altura;
     private ?string $peso;
     private ?string $pe;
     private ?string $nacionalidade;
+    private ?string $posicao;
     private ?FavPosicao $favPosicao;
-    private ?Clubes $Clube;
+    private ?Clube $Clube;
 
     /**
      * Get the value of id
@@ -40,9 +41,9 @@ class Jogadores {
     /**
      * Get the value of nome
      */ 
-    public function getNome()
+    public function getNomeJogador()
     {
-        return $this->nome;
+        return $this->nomeJogador;
     }
 
     /**
@@ -50,9 +51,9 @@ class Jogadores {
      *
      * @return  self
      */ 
-    public function setNome($nome)
+    public function setNomeJogador($nomeJogador)
     {
-        $this->nome = $nome;
+        $this->nomeJogador = $nomeJogador;
 
         return $this;
     }
@@ -98,21 +99,21 @@ class Jogadores {
     }
 
     /**
-     * Get the value of nome_uniforme
+     * Get the value of nomeUniforme
      */ 
-    public function getNome_uniforme()
+    public function getNomeUniforme()
     {
-        return $this->nome_uniforme;
+        return $this->nomeUniforme;
     }
 
     /**
-     * Set the value of nome_uniforme
+     * Set the value of nomeUniforme
      *
      * @return  self
      */ 
-    public function setNome_uniforme($nome_uniforme)
+    public function setNomeUniforme($nomeUniforme)
     {
-        $this->nome_uniforme = $nome_uniforme;
+        $this->nomeUniforme = $nomeUniforme;
 
         return $this;
     }
@@ -233,6 +234,26 @@ class Jogadores {
     public function setClube($Clube)
     {
         $this->Clube = $Clube;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of posicao
+     */ 
+    public function getPosicao()
+    {
+        return $this->posicao;
+    }
+
+    /**
+     * Set the value of posicao
+     *
+     * @return  self
+     */ 
+    public function setPosicao($posicao)
+    {
+        $this->posicao = $posicao;
 
         return $this;
     }

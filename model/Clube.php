@@ -1,11 +1,11 @@
 <?php
 //Modelo para Aluno
-require_once(__DIR__ . "/Estadios.php");
+require_once(__DIR__ . "/Estadio.php");
 
-class Clubes {
+class Clube {
 
     private ?int $id;
-    private ?string $nome;
+    private ?string $nomeClube;
     private ?int $iniciais;
     private ?string $escudo;
     private ?string $sede;
@@ -39,9 +39,9 @@ class Clubes {
     /**
      * Get the value of nome
      */ 
-    public function getNome()
+    public function getNomeClube()
     {
-        return $this->nome;
+        return $this->nomeClube;
     }
 
     /**
@@ -49,9 +49,9 @@ class Clubes {
      *
      * @return  self
      */ 
-    public function setNome($nome)
+    public function setNome($nomeClube)
     {
-        $this->nome = $nome;
+        $this->nomeClube = $nomeClube;
 
         return $this;
     }

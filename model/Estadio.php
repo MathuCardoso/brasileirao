@@ -3,7 +3,7 @@
 class Estadios {
 
     private ?int $id;
-    private ?string $nome;
+    private ?string $nomeEstadio;
 
     /**
      * Get the value of id
@@ -26,21 +26,21 @@ class Estadios {
     }
 
     /**
-     * Get the value of nome
+     * Get the value of nomeEstadio
      */ 
-    public function getNome()
+    public function getNomeEstadio()
     {
-        return $this->nome;
+        return $this->nomeEstadio;
     }
 
     /**
-     * Set the value of nome
+     * Set the value of nomeEstadio
      *
      * @return  self
      */ 
-    public function setNome($nome)
+    public function setNomeEstadio($nomeEstadio)
     {
-        $this->nome = $nome;
+        $this->nomeEstadio = $nomeEstadio;
 
         return $this;
     }
