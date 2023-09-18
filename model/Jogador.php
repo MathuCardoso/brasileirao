@@ -7,7 +7,7 @@ class Jogador
 
     private ?int $id;
     private ?string $nomeJogador;
-    private ?string $nascimento;
+    private ?string $idade;
     private ?int $numero;
     private ?string $nomeUniforme;
     private ?int $altura;
@@ -66,9 +66,9 @@ class Jogador
     /**
      * Get the value of nascimento
      */
-    public function getNascimento()
+    public function getIdade()
     {
-        return $this->nascimento;
+        return $this->idade;
     }
 
     /**
@@ -76,9 +76,9 @@ class Jogador
      *
      * @return  self
      */
-    public function setNascimento($nascimento)
+    public function setIdade($idade)
     {
-        $this->nascimento = $nascimento;
+        $this->idade = $idade;
 
         return $this;
     }

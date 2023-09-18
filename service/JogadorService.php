@@ -14,8 +14,8 @@ class JogadorService {
         }
 
         //Validar a data de nascimento
-        if(! $jogador->getNascimento()) {
-            array_push($erros, "Informe a data de nascimento do jogador!");
+        if(! $jogador->getIdade()) {
+            array_push($erros, "Informe a idade do jogador!");
         }
 
         //Validar estrangeiro

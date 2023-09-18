@@ -25,7 +25,7 @@ require(__DIR__ . "/../include/header.php");
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Nascimento</th>
+            <th>Idade</th>
             <th>Nº da camisa</th>
             <th>Nome no uniforme</th>
             <th>Altura</th>
@@ -40,7 +40,7 @@ require(__DIR__ . "/../include/header.php");
         <?php foreach ($jogadores as $j) : ?>
             <tr>
                 <td><?= $j->getNomeJogador(); ?></td>
-                <td><?= $j->getNascimento(); ?></td>
+                <td><?= $j->getIdade(); ?></td>
                 <td><?= $j->getNumero(); ?></td>
                 <td><?= $j->getNomeUniforme(); ?></td>
                 <td><?= $j->getAltura(); ?></td>

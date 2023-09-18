@@ -21,8 +21,8 @@ $clubes = $clubeCont->listar();
     </div>
 
     <div>
-        <label for="txtNascimento">Data de nascimento:</label>
-        <input type="date" name="nascimento" id="txtNascimento" value="<?php echo ($jogador ? $jogador->getNascimento() : ''); ?>" />
+        <label for="txtNascimento">Idade:</label>
+        <input type="number" name="idade" id="txtIdade" value="<?php echo ($jogador ? $jogador->getIdade() : ''); ?>" />
     </div>
 
     <div>

@@ -53,12 +53,3 @@ INSERT INTO estadios (nome) VALUES ('São januário');
 INSERT INTO estadios (nome) VALUES ('Neo Química Arena');
 INSERT INTO estadios (nome) VALUES ('Vila Belmiro');
 
-/* INSERTs posicao */
-INSERT INTO favPosicao (posicao) VALUES ('Centro-avante');
-INSERT INTO favPosicao (posicao) VALUES ('Ponta-Direita');
-INSERT INTO favPosicao (posicao) VALUES ('Ponta-Esquerda');
-INSERT INTO favPosicao (posicao) VALUES ('Volante');
-INSERT INTO favPosicao (posicao) VALUES ('Lateral Direito');
-INSERT INTO favPosicao (posicao) VALUES ('Lateral Esquerdo');
-INSERT INTO favPosicao (posicao) VALUES ('Zagueiro');
-INSERT INTO favPosicao (posicao) VALUES ('Goleiro');

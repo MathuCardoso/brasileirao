@@ -18,7 +18,7 @@ if(isset($_POST['submetido'])) {
     //echo "clicou no gravar";
     //Captura os campo do formulário
     $nomeJogador = trim($_POST['nomeJogador']) ? trim($_POST['nomeJogador']) : null;
-    $nascimento = $_POST['nascimento'] ? $_POST['nascimento'] : null;
+    $idade = $_POST['idade'] ? $_POST['idade'] : null;
     $numero = trim($_POST['numero']) ? trim($_POST['numero']) : null;
     $nomeUniforme = trim($_POST['nome_uniforme']) ? trim($_POST['nome_uniforme']) : null;
     $altura = trim($_POST['altura']) ? trim($_POST['altura']) : null;
@@ -33,7 +33,7 @@ if(isset($_POST['submetido'])) {
     //Criar um objeto Jogador para persistência
     $jogador = new Jogador();
     $jogador->setNomeJogador($nomeJogador);
-    $jogador->setNascimento($nascimento);
+    $jogador->setIdade($idade);
     $jogador->setNumero($numero);
     $jogador->setNomeUniforme($nomeUniforme);
     $jogador->setAltura($altura);

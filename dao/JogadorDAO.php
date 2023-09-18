@@ -17,13 +17,13 @@ class JogadorDAO
     public function insert(Jogador $jogador)
     {
         $sql = "INSERT INTO jogadores" .
-            " (nome_jogador, nascimento, numero, nome_uniforme, altura, peso, pe, 
+            " (nome_jogador, idade, numero, nome_uniforme, altura, peso, pe, 
                nacionalidade, posicao, id_clube)" .
                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $jogador->getNomeJogador(),
-            $jogador->getNascimento(),
+            $jogador->getIdade(),
             $jogador->getNumero(),
             $jogador->getNomeUniforme(),
             $jogador->getAltura(),
@@ -39,14 +39,14 @@ class JogadorDAO
     {
         $conn = Connection::getConnection();
 
-        $sql = "UPDATE jogadores SET nome_jogador = ?, nascimento = ?," .
+        $sql = "UPDATE jogadores SET nome_jogador = ?, idade = ?," .
             " numero = ?, nome_uniforme = ?, altura = ?, peso = ?, pe = ?" .
             " nacionalidade = ?, posicao = ?, id_clube = ?" .
             " WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             $jogador->getNomeJogador(),
-            $jogador->getNascimento(),
+            $jogador->getIdade(),
             $jogador->getNumero(),
             $jogador->getNomeUniforme(),
             $jogador->getAltura(),
@@ -117,7 +117,7 @@ public function findById(int $id)
                 $jogador = new Jogador();
                 $jogador->setId($reg['id'])
                 ->setNomeJogador($reg['nome_jogador'])
-                ->setNascimento($reg['nascimento'])
+                ->setIdade($reg['idade'])
                 ->setNumero($reg['numero'])
                 ->setNomeUniforme($reg['nome_uniforme'])
                 ->setAltura($reg['altura'])
