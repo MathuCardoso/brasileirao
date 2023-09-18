@@ -1,26 +1,31 @@
 <?php
 //Modelo para Jogadores
-require_once(__DIR__ . "/FavPosicao.php");
 require_once(__DIR__ . "/Clube.php");
 
-class Jogador {
+class Jogador
+{
 
     private ?int $id;
     private ?string $nomeJogador;
-    private ?int $nascimento;
-    private ?string $numero;
+    private ?string $nascimento;
+    private ?int $numero;
     private ?string $nomeUniforme;
-    private ?string $altura;
-    private ?string $peso;
+    private ?int $altura;
+    private ?int $peso;
     private ?string $pe;
     private ?string $nacionalidade;
     private ?string $posicao;
-    private ?FavPosicao $favPosicao;
-    private ?Clube $Clube;
+    private ?Clube $clube;
+
+    public function __construct()
+    {
+        $this->id = 0;
+        $this->clube = null;
+    }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -30,7 +35,7 @@ class Jogador {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -40,7 +45,7 @@ class Jogador {
 
     /**
      * Get the value of nome
-     */ 
+     */
     public function getNomeJogador()
     {
         return $this->nomeJogador;
@@ -50,7 +55,7 @@ class Jogador {
      * Set the value of nome
      *
      * @return  self
-     */ 
+     */
     public function setNomeJogador($nomeJogador)
     {
         $this->nomeJogador = $nomeJogador;
@@ -60,7 +65,7 @@ class Jogador {
 
     /**
      * Get the value of nascimento
-     */ 
+     */
     public function getNascimento()
     {
         return $this->nascimento;
@@ -70,7 +75,7 @@ class Jogador {
      * Set the value of nascimento
      *
      * @return  self
-     */ 
+     */
     public function setNascimento($nascimento)
     {
         $this->nascimento = $nascimento;
@@ -80,7 +85,7 @@ class Jogador {
 
     /**
      * Get the value of numero
-     */ 
+     */
     public function getNumero()
     {
         return $this->numero;
@@ -90,7 +95,7 @@ class Jogador {
      * Set the value of numero
      *
      * @return  self
-     */ 
+     */
     public function setNumero($numero)
     {
         $this->numero = $numero;
@@ -100,7 +105,7 @@ class Jogador {
 
     /**
      * Get the value of nomeUniforme
-     */ 
+     */
     public function getNomeUniforme()
     {
         return $this->nomeUniforme;
@@ -110,7 +115,7 @@ class Jogador {
      * Set the value of nomeUniforme
      *
      * @return  self
-     */ 
+     */
     public function setNomeUniforme($nomeUniforme)
     {
         $this->nomeUniforme = $nomeUniforme;
@@ -120,7 +125,7 @@ class Jogador {
 
     /**
      * Get the value of altura
-     */ 
+     */
     public function getAltura()
     {
         return $this->altura;
@@ -130,7 +135,7 @@ class Jogador {
      * Set the value of altura
      *
      * @return  self
-     */ 
+     */
     public function setAltura($altura)
     {
         $this->altura = $altura;
@@ -140,7 +145,7 @@ class Jogador {
 
     /**
      * Get the value of peso
-     */ 
+     */
     public function getPeso()
     {
         return $this->peso;
@@ -150,7 +155,7 @@ class Jogador {
      * Set the value of peso
      *
      * @return  self
-     */ 
+     */
     public function setPeso($peso)
     {
         $this->peso = $peso;
@@ -160,7 +165,7 @@ class Jogador {
 
     /**
      * Get the value of pe
-     */ 
+     */
     public function getPe()
     {
         return $this->pe;
@@ -170,7 +175,7 @@ class Jogador {
      * Set the value of pe
      *
      * @return  self
-     */ 
+     */
     public function setPe($pe)
     {
         $this->pe = $pe;
@@ -180,7 +185,7 @@ class Jogador {
 
     /**
      * Get the value of nacionalidade
-     */ 
+     */
     public function getNacionalidade()
     {
         return $this->nacionalidade;
@@ -190,7 +195,7 @@ class Jogador {
      * Set the value of nacionalidade
      *
      * @return  self
-     */ 
+     */
     public function setNacionalidade($nacionalidade)
     {
         $this->nacionalidade = $nacionalidade;
@@ -199,48 +204,28 @@ class Jogador {
     }
 
     /**
-     * Get the value of favPosicao
-     */ 
-    public function getFavPosicao()
-    {
-        return $this->favPosicao;
-    }
-
-    /**
-     * Set the value of favPosicao
-     *
-     * @return  self
-     */ 
-    public function setFavPosicao($favPosicao)
-    {
-        $this->favPosicao = $favPosicao;
-
-        return $this;
-    }
-
-    /**
      * Get the value of Clube
-     */ 
+     */
     public function getClube()
     {
-        return $this->Clube;
+        return $this->clube;
     }
 
     /**
      * Set the value of Clube
      *
      * @return  self
-     */ 
-    public function setClube($Clube)
+     */
+    public function setClube($clube)
     {
-        $this->Clube = $Clube;
+        $this->clube = $clube;
 
         return $this;
     }
 
     /**
      * Get the value of posicao
-     */ 
+     */
     public function getPosicao()
     {
         return $this->posicao;
@@ -250,7 +235,7 @@ class Jogador {
      * Set the value of posicao
      *
      * @return  self
-     */ 
+     */
     public function setPosicao($posicao)
     {
         $this->posicao = $posicao;

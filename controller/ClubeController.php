@@ -1,6 +1,6 @@
 <?php 
 //Controller para Aluno
-
+require_once(__DIR__ . "/../util/Connection.php");
 require_once(__DIR__ . "/../dao/ClubeDAO.php");
 require_once(__DIR__ . "/../model/Clube.php");
 require_once(__DIR__ . "/../service/ClubeService.php");
@@ -16,11 +16,11 @@ class ClubeController {
     }
 
     public function listar() {
-        return $this->ClubeDAO->list();        
+        return $this->clubeDAO->list();        
     }
 
     public function buscarPorId(int $id) {
-        return $this->ClubeDAO->findById($id);
+        return $this->clubeDAO->findById($id);
     }
 
     public function inserir(Clube $clube) {

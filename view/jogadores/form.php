@@ -1,23 +1,23 @@
 <?php
-//Formulário para alunos
+//Formulário para jogadores
+
 
 require_once(__DIR__ . "/../../controller/ClubeController.php");
-require_once(__DIR__ . "../../../model/FavPosicao.php");
-require_once(__DIR__ . "../../../model/Clube.php");
 require_once(__DIR__ . "/../include/header.php");
 
-$cursoCont = new ClubeController();
-$cursos = $ClubeCont->listar();
-//print_r($cursos);
+$clubeCont = new ClubeController();
+$clubes = $clubeCont->listar();
+
+//print_r($clubes);
 ?>
 
 <h2><?php echo (!$jogador || $jogador->getId() <= 0 ? 'Inserir' : 'Alterar') ?> Jogador</h2>
 
-<form id="frmAluno" method="POST">
+<form id="formJogador" method="POST">
 
     <div>
-        <label for="txtNome">Nome:</label>
-        <input type="text" name="nome" id="txtNome" value="<?php echo ($jogador ? $jogador->getNome() : ''); ?>" />
+        <label for="txtNomeJogador">Nome do jogador:</label>
+        <input type="text" name="nomeJogador" id="txtNomeJogador" value="<?php echo ($jogador ? $jogador->getNomeJogador() : ''); ?>" />
     </div>
 
     <div>
@@ -28,18 +28,18 @@ $cursos = $ClubeCont->listar();
     <div>
         <label for="selNumero">Número:</label>
         <select id="selNumero" name="numero">
-            <option value="">---Selecione---</option>
+            <option value="">0</option>
             <?php
-            for ($i = 0; $i <= 99; $i++) {
-                echo "<option value='$i' ($numero == $i ? ' selected' : '')>$i</option>";
+            for ($i = 1; $i <= 99; $i++) {
+                echo "<option value='$i'" . ($numero == $i ? ' selected' : '') . ">$i</option>";
             }
             ?>
         </select>
     </div>
 
     <div>
-        <label for="nomeCamisa">Nome na camisa:</label>
-        <input type="text" name="nomeCamisa" id="nomeCamisa" value="<?php echo ($jogador ? $jogador->getNomeCamisa() : ''); ?>" />
+        <label for="nomeUniforme">Nome na Uniforme:</label>
+        <input type="text" name="nome_uniforme" id="nomeUniforme" value="<?php echo ($jogador ? $jogador->getNomeUniforme() : ''); ?>" />
     </div>
 
     <div>
@@ -57,13 +57,13 @@ $cursos = $ClubeCont->listar();
         <select id="pe" name="pe">
             <option value="">---Selecione---</option>
 
-            <option value="D" <?php echo ($jogador && $jogador->getPe() == 'D' ? 'selected' : ''); ?>>
+            <option value="Direito" <?php echo ($jogador && $jogador->getPe() == 'Direito' ? 'selected' : ''); ?>>
                 Direito</option>
 
-            <option value="E" <?php echo ($jogador && $jogador->getPe() == 'E' ? 'selected' : ''); ?>>
+            <option value="Esquerdo" <?php echo ($jogador && $jogador->getPe() == 'Esquerdo' ? 'selected' : ''); ?>>
                 Esquerdo</option>
 
-            <option value="A" <?php echo ($jogador && $jogador->getPe() == 'A' ? 'selected' : ''); ?>>
+            <option value="Ambidestro" <?php echo ($jogador && $jogador->getPe() == 'Ambidestro' ? 'selected' : ''); ?>>
                 Ambidestro</option>
         </select>
     </div>
@@ -74,32 +74,42 @@ $cursos = $ClubeCont->listar();
                                                                             echo ($jogador ? $jogador->getNacionalidade() : ''); ?>" />
     </div>
 
-    
+
     <div>
-        <label for="ataque">Ataque</label>
-            <input type="radio" name="posicao" class="radio" id="ataque" value="Ataque" <?php echo ($posicao == 'Ataque' ? 'checked' : ''); ?>>
+        <label for="posicao">Ataque</label>
+        <input type="radio" name="posicao" id="ataque" value="Ataque" <?php echo ($posicao == 'Ataque' ? 'checked' : ''); ?>>
+
+        <label for="ataque">Meio-Campo</label>
+        <input type="radio" name="posicao" id="meio-campo" value="Meio-Campo" <?php echo ($posicao == 'Meio-Campo' ? 'checked' : ''); ?>>
+
+        <label for="meio-campo">Defesa</label>
+        <input type="radio" name="posicao" id="defesa" value="Defesa" <?php echo ($posicao == 'Defesa' ? 'checked' : ''); ?>>
+
+        <label for="defesa">Goleiro</label>
+        <input type="radio" name="posicao" id="gol" value="Goleiro" <?php echo ($posicao == 'Goleiro' ? 'checked' : ''); ?>>
     </div>
 
-    <div class="input-radio">
-        <label for="meio-campo">Meio-Campo</label>
-        <input type="radio" name="posicao" class="radio" id="meio-campo" value="Meio-Campo" <?php echo ($posicao == 'Meio-Campo' ? 'checked' : ''); ?>>
+    <div>
+        <label for="clube">Clube do jogador:</label>
+        <select id="clube" name="id_clube">
+            <option value="">---Selecione---</option>
+
+            <?php foreach($clubes as $clube): ?>
+                <option value="<?= $clube->getId(); ?>"
+                    <?php 
+                        if($jogador && $jogador->getClube() && 
+                            $jogador->getClube()->getId() == $clube->getId())
+                            echo 'selected';
+                    ?>
+                >
+                    <?= $clube->getNomeClube(); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
 
 
-    <div class="input-radio">
-        <label for="defesa">Defesa</label>
-        <input type="radio" name="posicao" class="radio" id="defesa" value="Defesa" <?php echo ($posicao == 'Defesa' ? 'checked' : ''); ?>>
-    </div>
-
-    <div class="input-radio">
-        <label for="gol">Goleiro</label>
-        <input type="radio" name="posicao" class="radio" id="gol" value="Gol" <?php echo ($posicao == 'Gol' ? 'checked' : ''); ?>>
-    </div>
-
-    
-
-
-    <input type="hidden" name="id" value="<?php echo ($aluno ? $aluno->getId() : 0); ?>" />
+    <input type="hidden" name="id" value="<?php echo ($jogador ? $jogador->getId() : 0); ?>" />
 
     <input type="hidden" name="submetido" value="1" />
 

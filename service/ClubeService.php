@@ -1,30 +1,42 @@
 <?php 
 //Classe service para aluno
 
-require_once(__DIR__ . "/../model/Jogador.php");
+require_once(__DIR__ . "/../model/clube.php");
 
-class JogadorService {
+class ClubeService {
 
-    public function validarDados(Jogadores $jogador) {
+    public function validarDados(Clube $clube) {
         $erros = array();
         
         //Validar o nome
-        if(! $jogador->getNome()) {
+        if(! $clube->getNomeClube()) {
             array_push($erros, "Informe o nome!");
         }
 
         //Validar a idade
-        if(! $jogador->getNascimento()) {
-            array_push($erros, "Informe a data de nascimento do jogador!");
+        if(! $clube->getIniciais()) {
+            array_push($erros, "Informe a data de nascimento do clube$clube!");
         }
 
         //Validar estrangeiro
-        if(! $jogador->getEstrangeiro()) {
-            array_push($erros, "Informe se o jogador é estrangeiro!");
+        if(! $clube->getEscudo()) {
+            array_push($erros, "Informe se o clube$clube é estrangeiro!");
         }
 
         //Validar curso
-        if(! $jogador->getCurso()) {
+        if(! $clube->getEstadio()) {
+            array_push($erros, "Informe o curso!");
+        }
+
+        if(! $clube->getCor1()) {
+            array_push($erros, "Informe o curso!");
+        }
+
+        if(! $clube->getCor2()) {
+            array_push($erros, "Informe o curso!");
+        }
+
+        if(! $clube->getCor3()) {
             array_push($erros, "Informe o curso!");
         }
 

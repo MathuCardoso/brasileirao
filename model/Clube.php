@@ -6,14 +6,21 @@ class Clube {
 
     private ?int $id;
     private ?string $nomeClube;
-    private ?int $iniciais;
+    private ?string $iniciais;
     private ?string $escudo;
     private ?string $sede;
     private ?string $tecnico;
     private ?string $cor1;
     private ?string $cor2;
     private ?string $cor3;
-    private ?Estadios $estadio;
+    private ?Estadio $estadio;
+
+
+    public function __construct()
+    {
+        $this->id = 0;
+        $this->estadio = null;
+    }
 
 
     /**
@@ -49,7 +56,7 @@ class Clube {
      *
      * @return  self
      */ 
-    public function setNome($nomeClube)
+    public function setNomeClube($nomeClube)
     {
         $this->nomeClube = $nomeClube;
 

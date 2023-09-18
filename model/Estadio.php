@@ -1,6 +1,6 @@
 <?php
 //Modelo para Estádios
-class Estadios {
+class Estadio {
 
     private ?int $id;
     private ?string $nomeEstadio;

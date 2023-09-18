@@ -1,11 +1,11 @@
 <?php
-//DAO para Aluno
+//DAO para Clube
 require_once(__DIR__ . "/../util/Connection.php");
 require_once(__DIR__ . "/../model/Clube.php");
+require_once(__DIR__ . "/../model/Estadio.php");
 
 class ClubeDAO
 {
-
     private $conn;
 
     public function __construct()
@@ -16,16 +16,15 @@ class ClubeDAO
     public function insert(Clube $clube)
     {
         $sql = "INSERT INTO clubes" .
-            " (nome_clube, iniciais, escudo, tecnico, id_estadio, cor1,
-                   cor2, cor3)" . "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            " (nome_clube, iniciais, escudo, tecnico, id_estadio, cor1, cor2, cor3)" .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),
             $clube->getIniciais(),
             $clube->getEscudo(),
             $clube->getTecnico(),
-            $clube->getEstadio()->getNomeEstadio(),
-            $clube->getCor1(),
+            $clube->getEstadio()->getId(),
             $clube->getCor1(),
             $clube->getCor2(),
             $clube->getCor3()
@@ -34,94 +33,78 @@ class ClubeDAO
 
     public function update(Clube $clube)
     {
-        $conn = Connection::getConnection();
-
-        $sql = "UPDATE alunos SET nome = ?, idade = ?," .
-            " estrangeiro = ?, id_curso = ?" .
-            " WHERE id = ?";
-        $stmt = $conn->prepare($sql);
+        $sql = "UPDATE clubes SET nome_clube = ?, iniciais = ?, escudo = ?, tecnico = ?, id_estadio = ?, cor1 = ?, cor2 = ?, cor3 = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),
             $clube->getIniciais(),
             $clube->getEscudo(),
             $clube->getTecnico(),
-            $clube->getEstadio()->getNomeEstadio(),
-            $clube->getCor1(),
+            $clube->getEstadio()->getId(),
             $clube->getCor1(),
             $clube->getCor2(),
-            $clube->getCor3()
+            $clube->getCor3(),
+            $clube->getId()
         ]);
     }
 
     public function deleteById(int $id)
     {
-        $conn = Connection::getConnection();
-
         $sql = "DELETE FROM clubes WHERE id = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
     }
 
     public function list()
     {
-        $sql = "SELECT a.*," .
-            " c.nome AS nome_curso, c.turno AS turno_curso" .
-            " FROM alunos a" .
-            " JOIN cursos c ON (c.id = a.id_curso)" .
-            " ORDER BY a.nome";
-        $stm = $this->conn->prepare($sql);
-        $stm->execute();
-        $result = $stm->fetchAll();
+        $sql = "SELECT * FROM clubes ORDER BY nome_clube";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
         return $this->mapBancoParaObjeto($result);
     }
 
     public function findById(int $id)
     {
-        $conn = Connection::getConnection();
-
-        $sql = "SELECT a.*," .
-            " c.nome AS nome_curso, c.turno AS turno_curso" .
-            " FROM alunos a" .
-            " JOIN cursos c ON (c.id = a.id_curso)" .
-            " WHERE a.id = ?";
-
-        $stmt = $conn->prepare($sql);
+        $sql = "SELECT * FROM clubes WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetchAll();
 
-        //Criar o objeto Aluno
-        $alunos = $this->mapBancoParaObjeto($result);
+        $clubes = $this->mapBancoParaObjeto($result);
 
-        if (count($alunos) == 1)
-            return $alunos[0];
-        elseif (count($alunos) == 0)
+        if (count($clubes) == 1)
+            return $clubes[0];
+        elseif (count($clubes) == 0)
             return null;
 
-        die("AlunoDAO.findById - Erro: mais de um aluno" .
-            " encontrado para o ID " . $id);
+        die("ClubeDAO.findById - Erro: mais de um clube encontrado para o ID " . $id);
     }
 
-    //Converte do formato Banco (array associativo) para Objeto
     private function mapBancoParaObjeto($result)
     {
-        $alunos = array();
+        $clubes = array();
 
         foreach ($result as $reg) {
-            $aluno = new Jogador();
-            $aluno->setId($reg['id'])
-                ->setNome($reg['nome'])
-                ->setEstrangeiro($reg['estrangeiro'])
-                ->setIdade($reg['idade']);
+            $clube = new Clube();
+            $clube->setId($reg['id'])
+                ->setNomeClube($reg['nome_clube'])
+                ->setIniciais($reg['iniciais'])
+                ->setEscudo($reg['escudo'])
+                ->setTecnico($reg['tecnico'])
+                ->setCor1($reg['cor1'])
+                ->setCor2($reg['cor2'])
+                ->setCor3($reg['cor3']);
 
-            $curso = new Clube();
-            $curso->setId($reg['id_curso'])
-                ->setNome($reg['nome_curso'])
-                ->setTurno($reg['turno_curso']);
-            $aluno->setCurso($curso);
+            $estadio = new Estadio();
+            $estadio->setId($reg['id_estadio']);
 
-            array_push($alunos, $aluno);
+            $clube->setEstadio($estadio);
+
+            array_push($clubes, $clube);
         }
 
-        return $alunos;
+        return $clubes;
     }
 }
+?>

@@ -13,14 +13,14 @@ class JogadorService {
             array_push($erros, "Informe o nome do jogador!");
         }
 
-        //Validar a idade
+        //Validar a data de nascimento
         if(! $jogador->getNascimento()) {
             array_push($erros, "Informe a data de nascimento do jogador!");
         }
 
         //Validar estrangeiro
         if(! $jogador->getNumero()) {
-            array_push($erros, "Informe o nuúmero do jogador!");
+            array_push($erros, "Informe o número do jogador!");
         }
 
         //Validar curso
@@ -46,10 +46,6 @@ class JogadorService {
 
         if(! $jogador->getPosicao()) {
             array_push($erros, "Informe a posição do jogador!");
-        }
-
-        if(! $jogador->getFavPosicao()) {
-            array_push($erros, "Informe a posição favorita do jogador!");
         }
 
         if(! $jogador->getClube()) {

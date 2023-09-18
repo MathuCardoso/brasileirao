@@ -1,18 +1,19 @@
 <?php 
 //Controller para Aluno
 
+require_once(__DIR__ . "/../util/Connection.php");
 require_once(__DIR__ . "/../dao/JogadorDAO.php");
-require_once(__DIR__ . "/../model/Jogadores.php");
+require_once(__DIR__ . "/../model/Jogador.php");
 require_once(__DIR__ . "/../service/JogadorService.php");
 
-class AlunoController {
+class JogadorController {
 
     private $jogadorDAO;
-    private $alunoService;
+    private $jogadorService;
 
     public function __construct() {
         $this->jogadorDAO = new JogadorDAO();        
-        $this->alunoService = new JogadorService();
+        $this->jogadorService = new JogadorService();
     }
 
     public function listar() {
@@ -25,7 +26,7 @@ class AlunoController {
 
     public function inserir(Jogador $jogador) {
         //Valida e retorna os erros caso existam
-        $erros = $this->alunoService->validarDados($jogador);
+        $erros = $this->jogadorService->validarDados($jogador);
         if($erros) 
             return $erros;
 
