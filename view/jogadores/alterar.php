@@ -29,6 +29,7 @@ if(isset($_POST['submetido'])) {
     
     //Criar um objeto jogador para persistência
     $jogador = new Jogador();
+    $jogador->setId($idJogador);
     $jogador->setNomeJogador($nomeJogador);
     $jogador->setIdade($idade);
     $jogador->setNumero($numero);
@@ -38,7 +39,10 @@ if(isset($_POST['submetido'])) {
     $jogador->setPe($pe);
     $jogador->setNacionalidade($nacionalidade);
     $jogador->setPosicao($posicao);
-    $jogador->setClube($idClube);
+
+    $clube = new Clube();
+    $clube->setId($idClube);
+    $jogador->setClube($clube);
 
     //Criar um jogadorController 
     $jogadorCont = new JogadorController();

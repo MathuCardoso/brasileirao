@@ -40,7 +40,7 @@ class JogadorDAO
         $conn = Connection::getConnection();
 
         $sql = "UPDATE jogadores SET nome_jogador = ?, idade = ?," .
-            " numero = ?, nome_uniforme = ?, altura = ?, peso = ?, pe = ?" .
+            " numero = ?, nome_uniforme = ?, altura = ?, peso = ?, pe = ?," .
             " nacionalidade = ?, posicao = ?, id_clube = ?" .
             " WHERE id = ?";
         $stmt = $conn->prepare($sql);
@@ -54,7 +54,8 @@ class JogadorDAO
             $jogador->getPe(),
             $jogador->getNacionalidade(),
             $jogador->getPosicao(),
-            $jogador->getClube()->getNomeClube()
+            $jogador->getClube()->getId(),
+            $jogador->getId()
         ]);
     }
 
