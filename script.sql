@@ -1,21 +1,14 @@
 /* TABELA estadios */
 CREATE TABLE estadios ( 
   id int AUTO_INCREMENT NOT NULL, 
-  nome varchar(70) NOT NULL,
+  nome_estadio varchar(70) NOT NULL,
   CONSTRAINT pk_clubes PRIMARY KEY (id)
-);
-
-/* TABELA posicao */
-CREATE TABLE favPosicao ( 
-  id int AUTO_INCREMENT NOT NULL, 
-  posicao varchar(70) NOT NULL,
-  CONSTRAINT pk_posicao PRIMARY KEY (id) 
 );
 
 /* TABELA clubes */
 CREATE TABLE clubes ( 
   id int AUTO_INCREMENT NOT NULL, 
-  nome varchar(70) NOT NULL,
+  nome_clube varchar(70) NOT NULL,
   iniciais varchar(3) NOT NULL,
   escudo longblob NOT NULL,
   sede varchar(70) NOT NULL,
@@ -31,7 +24,7 @@ CREATE TABLE clubes (
 /* TABELA jogadores */
 CREATE TABLE jogadores (
   id int AUTO_INCREMENT NOT NULL, 
-  nome varchar(150) NOT NULL, 
+  nome_jogador varchar(150) NOT NULL, 
   nascimento date NOT NULL,
   numero int NOT NULL,
   nome_uniforme varchar(100) NOT NULL,

@@ -48,10 +48,16 @@ require(__DIR__ . "/../include/header.php");
                 <td><?= $j->getPe(); ?></td>
                 <td><?= $j->getNacionalidade(); ?></td>
                 <td><?= $j->getPosicao(); ?></td>
-                <td><?= $j->getClube(); ?></td>
-                <td><a href="alterar.php?idJogador=<?= $j->getId() ?>"></a></td>
+                <td><?php $clube = $j->getClube();
+                    if ($clube) {
+                        echo $clube->getNomeClube();
+                    } else {
+                        echo "Nenhum clube associado";
+                    } ?></td>
+                <td><a href="alterar.php?idJogador=<?= $j->getId() ?>">Alterar</a></td>
                 <td><a href="excluir.php?idJogador=<?= $j->getId() ?>" onclick="
-                return confirm('Confirma a exclusão?');"></a></td></tr>
+                return confirm('Confirma a exclusão?');">Excluir</a></td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>

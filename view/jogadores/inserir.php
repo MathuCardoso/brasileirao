@@ -4,6 +4,7 @@
 require_once(__DIR__ . "/../../controller/JogadorController.php");
 require_once(__DIR__ . "/../../model/Jogador.php");
 require_once(__DIR__ . "/../../model/Clube.php");
+require_once(__DIR__ . "../../../dao/ClubeDAO.php");
 
 $msgErro = '';
 $jogador = null;
@@ -28,37 +29,39 @@ if(isset($_POST['submetido'])) {
     $posicao = isset($_POST['posicao']) ? trim($_POST['posicao']) : null;
     $idClube = trim($_POST['id_clube']) ? trim($_POST['id_clube']) : null;
 
-
-
-    //Criar um objeto Jogador para persistência
-    $jogador = new Jogador();
-    $jogador->setNomeJogador($nomeJogador);
-    $jogador->setIdade($idade);
-    $jogador->setNumero($numero);
-    $jogador->setNomeUniforme($nomeUniforme);
-    $jogador->setAltura($altura);
-    $jogador->setPeso($peso);
-    $jogador->setPe($pe);
-    $jogador->setNacionalidade($nacionalidade);
-    $jogador->setPosicao($posicao);
-
-    if($idClube) {
-        $clube = new Clube();
-        $clube->setId($idClube);
-        $jogador->setClube($clube);
-    }
-
-    //Criar um alunoController
-    $jogadorCont = new JogadorController();
-    $erros = $jogadorCont->inserir($jogador);
-
-    if(! $erros) { //Caso não tenha erros
-        //Redirecionar para o listar
-        header("location: listar.php");
-        exit;
-    } else { //Em caso de erros, exibí-los
-        $msgErro = implode("<br>", $erros);
-        //print_r($erros);
+    // Se $idClube não for nulo, buscar as informações do clube
+    if ($idClube) {
+        $clubeDAO = new ClubeDAO();
+        $clube = $clubeDAO->findById($idClube);
+    
+        if ($clube) {
+            // Criar um objeto Jogador e atribuir o clube a ele
+            $jogador = new Jogador();
+            $jogador->setNomeJogador($nomeJogador);
+            $jogador->setIdade($idade);
+            $jogador->setNumero($numero);
+            $jogador->setNomeUniforme($nomeUniforme);
+            $jogador->setAltura($altura);
+            $jogador->setPeso($peso);
+            $jogador->setPe($pe);
+            $jogador->setNacionalidade($nacionalidade);
+            $jogador->setPosicao($posicao);
+            $jogador->setClube($clube); // Aqui atribuímos o objeto Clube ao jogador
+    
+            // Agora você pode prosseguir com a inserção do jogador
+            $jogadorCont = new JogadorController();
+            $erros = $jogadorCont->inserir($jogador);
+    
+            if (!$erros) { //Caso não tenha erros
+                //Redirecionar para o listar
+                header("location: listar.php");
+                exit;
+            } else { //Em caso de erros, exibí-los
+                $msgErro = implode("<br>", $erros);
+            }
+        } else {
+            $msgErro = "Clube não encontrado com o ID especificado.";
+        }
     }
 }
 

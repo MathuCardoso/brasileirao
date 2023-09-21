@@ -129,6 +129,7 @@ public function findById(int $id)
             $clube = new Clube();
             $clube->setId($reg['id_clube']);
             $clube->setNomeClube($reg['nome_clube']);
+            $jogador->setClube($clube);
 
             array_push($jogadores, $jogador);
         }

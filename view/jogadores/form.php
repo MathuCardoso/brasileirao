@@ -31,7 +31,7 @@ $clubes = $clubeCont->listar();
             <option value="">0</option>
             <?php
             for ($i = 1; $i <= 99; $i++) {
-                echo "<option value='$i'" . ($numero == $i ? ' selected' : '') . ">$i</option>";
+                echo "<option value='$i'" . ($jogador && $jogador->getNumero() == $i ? ' selected' : '') . ">$i</option>";
             }
             ?>
         </select>
@@ -76,17 +76,17 @@ $clubes = $clubeCont->listar();
 
 
     <div>
-        <label for="posicao">Ataque</label>
-        <input type="radio" name="posicao" id="ataque" value="Ataque" <?php echo ($posicao == 'Ataque' ? 'checked' : ''); ?>>
+        <input type="radio" name="posicao" id="ataque" value="Ataque" <?php echo ($jogador && $jogador->getPosicao() == 'Ataque' ? 'checked' : ''); ?>>
+        <label for="ataque">Ataque</label>
 
+        <input type="radio" name="posicao" id="meio-campo" value="Meio-Campo" <?php echo ($jogador && $jogador->getPosicao() == 'Meio-Campo' ? 'checked' : ''); ?>>
         <label for="ataque">Meio-Campo</label>
-        <input type="radio" name="posicao" id="meio-campo" value="Meio-Campo" <?php echo ($posicao == 'Meio-Campo' ? 'checked' : ''); ?>>
 
         <label for="meio-campo">Defesa</label>
-        <input type="radio" name="posicao" id="defesa" value="Defesa" <?php echo ($posicao == 'Defesa' ? 'checked' : ''); ?>>
+        <input type="radio" name="posicao" id="defesa" value="Defesa" <?php echo ($jogador && $jogador->getPosicao() == 'Defesa' ? 'checked' : ''); ?>>
 
         <label for="defesa">Goleiro</label>
-        <input type="radio" name="posicao" id="gol" value="Goleiro" <?php echo ($posicao == 'Goleiro' ? 'checked' : ''); ?>>
+        <input type="radio" name="posicao" id="gol" value="Goleiro" <?php echo ($jogador && $jogador->getPosicao() == 'Goleiro' ? 'checked' : ''); ?>>
     </div>
 
     <div>
