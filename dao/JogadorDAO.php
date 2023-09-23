@@ -18,7 +18,7 @@ class JogadorDAO
     {
         $sql = "INSERT INTO jogadores" .
             " (nome_jogador, idade, numero, nome_uniforme, altura, peso, pe, 
-               nacionalidade, posicao, id_clube)" .
+               pais, posicao, id_clube)" .
                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
@@ -29,7 +29,7 @@ class JogadorDAO
             $jogador->getAltura(),
             $jogador->getPeso(),
             $jogador->getPe(),
-            $jogador->getNacionalidade(),
+            $jogador->getPais(),
             $jogador->getPosicao(),
             $jogador->getClube()->getId()
         ]);
@@ -41,7 +41,7 @@ class JogadorDAO
 
         $sql = "UPDATE jogadores SET nome_jogador = ?, idade = ?," .
             " numero = ?, nome_uniforme = ?, altura = ?, peso = ?, pe = ?," .
-            " nacionalidade = ?, posicao = ?, id_clube = ?" .
+            " pais = ?, posicao = ?, id_clube = ?" .
             " WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
@@ -52,7 +52,7 @@ class JogadorDAO
             $jogador->getAltura(),
             $jogador->getPeso(),
             $jogador->getPe(),
-            $jogador->getNacionalidade(),
+            $jogador->getPais(),
             $jogador->getPosicao(),
             $jogador->getClube()->getId(),
             $jogador->getId()
@@ -124,7 +124,7 @@ public function findById(int $id)
                 ->setAltura($reg['altura'])
                 ->setPeso($reg['peso'])
                 ->setPe($reg['pe'])
-                ->setNacionalidade($reg['nacionalidade'])
+                ->setPais($reg['pais'])
                 ->setPosicao($reg['posicao']);
 
             $clube = new Clube();

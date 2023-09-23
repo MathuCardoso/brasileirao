@@ -18,15 +18,15 @@ require(__DIR__ . "/../include/header.php");
 <h4>Listagem de jogadores</h4>
 
 <div>
-    <a class="btn btn-success" href="inserir.php">Inserir</a>
+    <a class="btn btn-primary mt-1 mb-3" href="inserir.php">Inserir</a>
 </div>
 
-<table class="table table-striped" border="1">
+<table class="tb" border="1">
     <thead>
         <tr>
             <th>Nome</th>
             <th>Idade</th>
-            <th>Nº da camisa</th>
+            <th>Nº</th>
             <th>Nome no uniforme</th>
             <th>Altura</th>
             <th>Peso</th>
@@ -34,19 +34,21 @@ require(__DIR__ . "/../include/header.php");
             <th>Nacionalidade</th>
             <th>Posição</th>
             <th>Clube</th>
+            <th>Editar</th>
+            <th>Excluir</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($jogadores as $j) : ?>
-            <tr>
+            <tr align="center">
                 <td><?= $j->getNomeJogador(); ?></td>
                 <td><?= $j->getIdade(); ?></td>
                 <td><?= $j->getNumero(); ?></td>
                 <td><?= $j->getNomeUniforme(); ?></td>
-                <td><?= $j->getAltura(); ?></td>
-                <td><?= $j->getPeso(); ?></td>
+                <td><?= $j->getAltura() . "cm"; ?></td>
+                <td><?= $j->getPeso() . "kg";?></td>
                 <td><?= $j->getPe(); ?></td>
-                <td><?= $j->getNacionalidade(); ?></td>
+                <td><?= $j->getPais(); ?></td>
                 <td><?= $j->getPosicao(); ?></td>
                 <td><?php $clube = $j->getClube();
                     if ($clube) {
@@ -54,7 +56,7 @@ require(__DIR__ . "/../include/header.php");
                     } else {
                         echo "Nenhum clube associado";
                     } ?></td>
-                <td><a href="alterar.php?idJogador=<?= $j->getId() ?>">Alterar</a></td>
+                <td><a href="alterar.php?idJogador=<?= $j->getId() ?>">Editar</a></td>
                 <td><a href="excluir.php?idJogador=<?= $j->getId() ?>" onclick="
                 return confirm('Confirma a exclusão?');">Excluir</a></td>
             </tr>

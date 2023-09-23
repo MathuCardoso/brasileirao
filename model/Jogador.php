@@ -13,7 +13,7 @@ class Jogador
     private ?int $altura;
     private ?int $peso;
     private ?string $pe;
-    private ?string $nacionalidade;
+    private ?string $pais;
     private ?string $posicao;
     private ?Clube $clube;
 
@@ -184,21 +184,21 @@ class Jogador
     }
 
     /**
-     * Get the value of nacionalidade
+     * Get the value of pais
      */
-    public function getNacionalidade()
+    public function getPais()
     {
-        return $this->nacionalidade;
+        return $this->pais;
     }
 
     /**
-     * Set the value of nacionalidade
+     * Set the value of pais
      *
      * @return  self
      */
-    public function setNacionalidade($nacionalidade)
+    public function setPais($pais)
     {
-        $this->nacionalidade = $nacionalidade;
+        $this->pais = $pais;
 
         return $this;
     }

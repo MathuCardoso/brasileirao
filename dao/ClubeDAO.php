@@ -64,7 +64,7 @@ class ClubeDAO
         return $this->mapBancoParaObjeto($result);
     }
 
-    public function findById(int $id)
+    public function findById(?int $id)
     {
         $sql = "SELECT * FROM clubes WHERE id = ?";
         $stmt = $this->conn->prepare($sql);

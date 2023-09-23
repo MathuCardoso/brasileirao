@@ -21,7 +21,7 @@ if(isset($_POST['submetido'])) {
     $altura = trim($_POST['altura']) ? trim($_POST['altura']) : null;
     $peso = trim($_POST['peso']) ? trim($_POST['peso']) : null;
     $pe = trim($_POST['pe']) ? trim($_POST['pe']) : null;
-    $nacionalidade = trim($_POST['nacionalidade']) ? trim($_POST['nacionalidade']) : null;
+    $pais = trim($_POST['pais']) ? trim($_POST['pais']) : null;
     $posicao = isset($_POST['posicao']) ? trim($_POST['posicao']) : null;
     $idClube = trim($_POST['id_clube']) ? trim($_POST['id_clube']) : null;
 
@@ -37,7 +37,7 @@ if(isset($_POST['submetido'])) {
     $jogador->setAltura($altura);
     $jogador->setPeso($peso);
     $jogador->setPe($pe);
-    $jogador->setNacionalidade($nacionalidade);
+    $jogador->setPais($pais);
     $jogador->setPosicao($posicao);
 
     $clube = new Clube();

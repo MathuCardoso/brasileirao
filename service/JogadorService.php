@@ -13,7 +13,7 @@ class JogadorService {
             array_push($erros, "Informe o nome do jogador!");
         }
 
-        //Validar a data de nascimento
+        //Validar a idade
         if(! $jogador->getIdade()) {
             array_push($erros, "Informe a idade do jogador!");
         }
@@ -40,8 +40,8 @@ class JogadorService {
             array_push($erros, "Informe se o jogador é destro, canhoto ou ambidestro!");
         }
 
-        if(! $jogador->getNacionalidade()) {
-            array_push($erros, "Informe a nacionalidade do jogador!");
+        if(! $jogador->getPais()) {
+            array_push($erros, "Informe o país do jogador!");
         }
 
         if(! $jogador->getPosicao()) {
