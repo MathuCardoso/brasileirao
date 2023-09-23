@@ -36,6 +36,10 @@ class JogadorService {
             array_push($erros, "Informe o peso do jogador!");
         }
 
+        if($jogador->getPeso() > 150) {
+            array_push($erros, "Um jogador não pode ser tão pesado!");
+        }
+
         if(! $jogador->getPe()) {
             array_push($erros, "Informe se o jogador é destro, canhoto ou ambidestro!");
         }

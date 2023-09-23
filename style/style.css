@@ -3,3 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.tb{
+    border: none;
+    border: 2px solid red;
+    color: red;
+}

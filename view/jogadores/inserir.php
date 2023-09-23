@@ -55,9 +55,6 @@ if (isset($_POST['submetido'])) {
                 //Redirecionar para o listar
                 header("location: listar.php");
                 exit;
-            } else { //Em caso de erros, exibí-los
-                $msgErro = implode("<br>", $erros);
-                //print_r($erros);
             }
         
     }
