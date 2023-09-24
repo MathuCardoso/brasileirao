@@ -13,60 +13,57 @@ $jogadores = $jogadorCont->listar();
 ?>
 
 <?php
-require(__DIR__ . "/../include/header.php");
+require(__DIR__ . "/../../view/include/header.php");
 ?>
 
-
-<h4 class="mt-3">Listagem de jogadores</h4>
+<h2 class="mt-4 text-center">Listagem de jogadores</h2>
 
 <div>
-    <a class="btn btn-primary mt-1 mb-3" href="inserir.php">Inserir</a>
+    <a class="btn btn-primary mt-1 mb-3" href="inserir.php">Cadastrar jogador</a>
 </div>
+
+
 
 <div class="row">
 
-<table class="tb table table-hover table-dark table-striped table-bordered" style="border: 3px solid black;">
-    <thead>
-        <tr class="text-center align-center">
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Nº</th>
-            <th style="min-width: 170px;">Nome no uniforme</th>
-            <th>Altura</th>
-            <th>Peso</th>
-            <th>Pé</th>
-            <th>Nacionalidade</th>
-            <th>Posição</th>
-            <th>Clube</th>
-            <th class="text-info">Editar</th>
-            <th class="text-danger">Excluir</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($jogadores as $j) : ?>
-            <tr align="center">
-                <td><?= $j->getNomeJogador(); ?></td>
-                <td><?= $j->getIdade(); ?></td>
-                <td><?= $j->getNumero(); ?></td>
-                <td><?= $j->getNomeUniforme(); ?></td>
-                <td><?= $j->getAltura() . "cm"; ?></td>
-                <td><?= $j->getPeso() . "kg";?></td>
-                <td><?= $j->getPe(); ?></td>
-                <td><?= $j->getPais(); ?></td>
-                <td><?= $j->getPosicao(); ?></td>
-                <td><?php $clube = $j->getClube();
-                    if ($clube) {
-                        echo $clube->getNomeClube();
-                    } else {
-                        echo "Nenhum clube associado";
-                    } ?></td>
-                <td><a class="text-info" href="alterar.php?idJogador=<?= $j->getId() ?>">Editar</a></td>
-                <td><a class="text-danger" href="excluir.php?idJogador=<?= $j->getId() ?>" onclick="
-                return confirm('Confirma a exclusão?');">Excluir</a></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+    <?php foreach ($jogadores as $j) : ?>
+
+
+        <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-jogadores" style="max-width: 540px; border: 5px solid black;">
+            <div class="row pr-0">
+                <div class="col-md-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/74/74472.png" class="img-fluid rounded-start" alt="...">
+                    <div class="outros text-center">
+                        <a class="text-info mr-1" href="alterar.php?idJogador=<?= $j->getId() ?>">Editar</a>
+                        <a class="text-danger ml-1" href="excluir.php?idJogador=<?= $j->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                    </div>
+                </div>
+                <div class="col-md-8 px-0">
+                    <div class="card-title">
+                        <h4 class="card-title mb-0"><?php echo $j->getNomeJogador(); ?></h4>
+                    </div>
+                    <div class="card-body d-flex p-0">
+                        <div class="card-body p-0">
+                            <p class="card-text fw-bold mb-0">Idade: <?php echo "<span class='fw-normal'>" . $j->getIdade() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0">Peso: <?php echo "<span class='fw-normal'>" . $j->getPeso() . "kg" . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0">Altura: <?php echo "<span class='fw-normal'>" . $j->getAltura() . "cm" . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0">Pé: <?php echo "<span class='fw-normal'>" . $j->getPe() . "</span>"; ?></p>
+                        </div>
+                        <div class="card-body ml-3 p-0">
+                            <p class="card-text fw-bold mb-0">Número: <?php echo "<span class='fw-normal'>" . $j->getNumero() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0">País: <?php echo "<span class='fw-normal'>" . $j->getPais() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0">Posicao: <?php echo "<span class='fw-normal'>" . $j->getPosicao() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0">Clube: <?php  $clube = $j->getClube();
+                                                                        if ($clube) {
+                                                                            echo "<span class='fw-normal'>" . $clube->getNomeClube() . "</span>";
+                                                                        } ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php endforeach; ?>
 </div>
 
 

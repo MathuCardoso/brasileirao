@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/../../util/config.php");
 ?>
 <nav class="navbar navbar-expand-md navbar-light bg-primary">
-    <a class="navbar-brand" href="#">Brasileirão 2023</a>
+    <a class="navbar-brand fs-3" href="<?= BASE_URL ?>/index.php">Brasileirão 2023</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navSite">
@@ -12,17 +12,17 @@ require_once(__DIR__ . "/../../util/config.php");
     <div class="collapse navbar-collapse" id="navSite">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="<?= BASE_URL ?>/index.php">Home</a>
+                <a class="nav-link text-black" href="<?= BASE_URL ?>/index.php">Home</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navDropDown" data-toggle="dropdown">Cadastros</a>
+                <a class="nav-link dropdown-toggle text-black" href="#" id="navDropDown" data-toggle="dropdown">Cadastros</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="<?= BASE_URL ?>/view/alunos/listar.php">Jogadores</a>
-                    <a class="dropdown-item" href="#">Clubes</a>
+                    <a class="dropdown-item text-black" href="<?= BASE_URL ?>/view/alunos/listar.php">Jogadores</a>
+                    <a class="dropdown-item text-black" href="#">Clubes</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Sobre</a>
+                <a class="nav-link text-black" href="#">Sobre</a>
             </li>
         </ul>
     </div>

@@ -8,9 +8,10 @@ require_once(__DIR__ . "/../include/header.php");
 
 $clubeCont = new ClubeController();
 $clubes = $clubeCont->listar();
+
 ?>
 
-<h2 class="text-center mt-4">Inserir jogador</h2>
+<h2 class="text-center mt-4"><?php echo (!$jogador || $jogador->getId() <= 0 ? 'Inserir' : 'Alterar') ?> Jogador</h2>
 
 <style>
     body::-webkit-scrollbar {
@@ -18,7 +19,7 @@ $clubes = $clubeCont->listar();
     }
 </style>
 
-<form id="formJogador" method="POST" class="row g-3 mt-2" novalidate>
+<form id="formJogador" method="POST" class="row g-3 mt-2 needs-validation" novalidate>
 
     <!--Nome do Jogador-->
     <div class="col-md-6">
@@ -28,8 +29,10 @@ $clubes = $clubeCont->listar();
 
                 if (!$nomeJogador) {
                     echo "<p class='mb-0 fw-bold text-danger'>Nome do jogador:</p>";
+                } elseif (strlen($nomeJogador) <= 2) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Isso é realmente um nome?</p>";
                 } elseif ($nomeJogador) {
-                    echo "<p class='mb-0 fw-bold text-success'>Nome do jogador:</p>";
+                    echo "<p class='mb-0 fw-bold text-success'>$nomeJogador</p>";
                 }
             } else echo "Nome do jogador:";
             ?></label>
@@ -46,7 +49,7 @@ $clubes = $clubeCont->listar();
                 if (!$nomeUniforme) {
                     echo "<p class='mb-0 fw-bold text-danger'>Nome no uniforme:</p>";
                 } elseif ($nomeUniforme) {
-                    echo "<p class='mb-0 fw-bold text-success'>Nome no uniforme:</p>";
+                    echo "<p class='mb-0 fw-bold text-success'>$nomeUniforme</p>";
                 }
             } else echo "Nome no uniforme:";
             ?></label>
@@ -62,10 +65,12 @@ $clubes = $clubeCont->listar();
 
                 if (!$altura) {
                     echo "<p class='mb-0 fw-bold text-danger'>Altura:</p>";
+                } elseif ($altura < 140) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Jogador baixo de mais.</p>";
                 } elseif ($altura > 220) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Jogador alto demais.</p>";
+                    echo "<p class='mb-0 fw-bold text-danger'>Jogador alto de mais.</p>";
                 } elseif ($altura) {
-                    echo "<p class='mb-0 fw-bold text-success'>Altura:</p>";
+                    echo "<p class='mb-0 fw-bold text-success'>" . $altura . "cm" . "</p>";
                 }
             } else echo "Altura:";
             ?></label>
@@ -81,10 +86,12 @@ $clubes = $clubeCont->listar();
 
                 if (!$peso) {
                     echo "<p class='mb-0 fw-bold text-danger'>Peso:</p>";
+                }elseif ($jogador->getPeso() < 50) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Jogador leve de mais.</p>";
                 } elseif ($peso > 190) {
                     echo "<p class='mb-0 fw-bold text-danger'>Jogador pesado de mais.</p>";
                 } elseif ($peso) {
-                    echo "<p class='mb-0 fw-bold text-success'>Peso:</p>";
+                    echo "<p class='mb-0 fw-bold text-success'>" . $peso . "kg" . "</p>";
                 }
             } else echo "Peso:";
             ?></label>
@@ -105,7 +112,7 @@ $clubes = $clubeCont->listar();
                 } else if ($idade > 50) {
                     echo "<p class='mb-0 fw-bold text-danger'>Jogador velho de mais.</p>";
                 } elseif ($idade) {
-                    echo "<p class='mb-0 fw-bold text-success'>Idade:</p>";
+                    echo "<p class='mb-0 fw-bold text-success'>$idade Anos de idade</p>";
                 }
             } else echo "Idade:";
             ?></label>
@@ -123,8 +130,10 @@ $clubes = $clubeCont->listar();
                     echo "<p class='mb-0 fw-bold text-danger'>Número:</p>";
                 } elseif ($numero < 1 || $numero > 99) {
                     echo "<p class='mb-0 fw-bold text-danger'>Números entre 1 e 99.</p>";
+                } elseif (count($camisaIgual) > 0) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Escolha outro número.</p>";
                 } elseif ($numero) {
-                    echo "<p class='mb-0 fw-bold text-success'>Número:</p>";
+                    echo "<p class='mb-0 fw-bold text-success'>Camisa $numero</p>";
                 }
             } else echo "Número";
             ?></label>
@@ -134,16 +143,17 @@ $clubes = $clubeCont->listar();
 
     <!--Pé-->
     <div class="col-md-3">
-        <label for="pe" class="form-label fs-5"><?php
-                                                if (isset($_POST['submetido'])) {
+        <label for="pe" class="form-label fs-5">
+            <?php
+            if (isset($_POST['submetido'])) {
 
-                                                    if (!$pe) {
-                                                        echo "<p class='mb-0 fw-bold text-danger'>Pé:</p>";
-                                                    } elseif ($pe) {
-                                                        echo "<p class='mb-0 fw-bold text-success'>Pé:</p>";
-                                                    }
-                                                } else echo "Pé";
-                                                ?></label>
+                if (!$pe) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Pé:</p>";
+                } elseif ($pe) {
+                    echo "<p class='mb-0 fw-bold text-success'>$pe</p>";
+                }
+            } else echo "Pé";
+            ?></label>
         <br>
         <select id="pe" name="pe" class="form-select fs-6">
             <option value="" selected></option>
@@ -161,16 +171,17 @@ $clubes = $clubeCont->listar();
 
     <!--País-->
     <div class="col-md-3">
-        <label for="pais" class="form-label fs-5"><?php
-                                                    if (isset($_POST['submetido'])) {
+        <label for="pais" class="form-label fs-5">
+            <?php
+            if (isset($_POST['submetido'])) {
 
-                                                        if (!$pais) {
-                                                            echo "<p class='mb-0 fw-bold text-danger'>País:</p>";
-                                                        } elseif ($pais) {
-                                                            echo "<p class='mb-0 fw-bold text-success'>País:</p>";
-                                                        }
-                                                    } else echo "País";
-                                                    ?></label>
+                if (!$pais) {
+                    echo "<p class='mb-0 fw-bold text-danger'>País:</p>";
+                } elseif ($pais) {
+                    echo "<p class='mb-0 fw-bold text-success'>$pais</p>";
+                }
+            } else echo "País";
+            ?></label>
         <br>
         <input placeholder="País do jogador" type="text" name="pais" class="form-control fs-5" id="pais" value="<?php echo ($jogador ? $jogador->getPais() : ''); ?>" />
     </div>
@@ -178,16 +189,17 @@ $clubes = $clubeCont->listar();
 
     <!--Posição-->
     <div class="form-check col-md-6">
-        <label class="form-label fs-5"><?php
-                                        if (isset($_POST['submetido'])) {
+        <label class="form-label fs-5">
+            <?php
+            if (isset($_POST['submetido'])) {
 
-                                            if (!$posicao) {
-                                                echo "<p class='mb-0 fw-bold text-danger'>Posição:</p>";
-                                            } elseif ($posicao) {
-                                                echo "<p class='mb-0 fw-bold text-success'>Posição:</p>";
-                                            }
-                                        } else echo "Posição";
-                                        ?></label>
+                if (!$posicao) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Posição:</p>";
+                } elseif ($posicao) {
+                    echo "<p class='mb-0 fw-bold text-success'>$posicao</p>";
+                }
+            } else echo "Posição";
+            ?></label>
 
         <br>
         <input type="radio" name="posicao" class="btn-check" id="ataque" value="Ataque" <?php echo ($jogador && $jogador->getPosicao() == 'Ataque' ? 'checked' : ''); ?>>
@@ -205,31 +217,31 @@ $clubes = $clubeCont->listar();
 
     <!--Clube do jogador-->
     <div class="col-md-6">
-        <label for="clube" class="form-label fs-5"><?php
-                                                    if (isset($_POST['submetido'])) {
+        <label for="clube" class="form-label fs-5">
+            <?php
+            if (isset($_POST['submetido'])) {
 
-                                                        if (!$idClube) {
-                                                            echo "<p class='mb-0 fw-bold text-danger'>Clube do jogador:</p>";
-                                                        } elseif ($idClube) {
-                                                            echo "<p class='mb-0 fw-bold text-success'>Clube do jogador:</p>";
-                                                        }
-                                                    } else echo "Clube do jogador";
-                                                    ?></label>
+                if (!$idClube) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Clube do jogador:</p>";
+                } elseif ($idClube) {
+                    echo "<p class='mb-0 fw-bold text-success'>Clube do jogador:</p>";
+                }
+            } else echo "Clube do jogador";
+            ?></label>
         <br>
         <select id="clube" name="id_clube" class="form-select">
             <option value=""></option>
 
             <?php foreach ($clubes as $clube) : ?>
-                <option value="<?= $clube->getId(); ?>" <?php
+                <option value="<?= $clube->getId(); ?>"
+                 
+                <?php
 
-                                                        if (
-                                                            $jogador && $jogador->getClube() &&
-                                                            $jogador->getClube()->getId() == $clube->getId()
-                                                        )
+                if ($jogador && $jogador->getClube() && $jogador->getClube()->getId() == $clube->getId())
+                echo 'selected'; ?>>
 
-                                                            echo 'selected'; ?>>
-
-                    <?= $clube->getNomeClube(); ?>
+                <?= $clube->getNomeClube(); 
+                ?>
                 </option>
             <?php endforeach; ?>
         </select>

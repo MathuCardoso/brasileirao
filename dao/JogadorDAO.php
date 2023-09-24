@@ -75,7 +75,7 @@ class JogadorDAO
     $sql = "SELECT j.*, c.nome_clube" . // Use "c.nome_clube" em vez de "c.nome"
         " FROM jogadores j" .
         " JOIN clubes c ON (c.id = j.id_clube)" .
-        " ORDER BY j.nome_jogador";
+        " ORDER BY j.id_clube";
     $stm = $this->conn->prepare($sql);
     $stm->execute();
     $result = $stm->fetchAll();

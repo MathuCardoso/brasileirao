@@ -1,62 +1,95 @@
-<?php 
+<?php
 //Classe service para aluno
 
 require_once(__DIR__ . "/../model/Jogador.php");
 
-class JogadorService {
+class JogadorService
+{
 
-    public function validarDados(Jogador $jogador) {
+    public function validarDados(Jogador $jogador)
+    {
         $erros = array();
-        
-        //Validar o nome
-        if(! $jogador->getNomeJogador()) {
-            array_push($erros, "Informe o nome do jogador!");
+
+        //Nome
+        if (!$jogador->getNomeJogador()) {
+            array_push($erros, "Erro");
+        } elseif (strlen($jogador->getNomeJogador()) <= 2) {
+            array_push($erros, "Erro");
         }
 
-        //Validar a idade
-        if(! $jogador->getIdade()) {
-            array_push($erros, "Informe a idade do jogador!");
+        //Idade
+        if (!$jogador->getIdade()) {
+            array_push($erros, "Erro");
+        } else if ($jogador->getIdade() < 15) {
+            array_push($erros, "Erro");
+        } else if ($jogador->getIdade() > 50) {
+            array_push($erros, "Erro");
         }
 
-        //Validar estrangeiro
-        if(! $jogador->getNumero()) {
-            array_push($erros, "Informe o número do jogador!");
+        $numero = trim($_POST['numero']) ? trim($_POST['numero']) : null;
+        $idClube = trim($_POST['id_clube']) ? trim($_POST['id_clube']) : null;
+
+        $sql = 'SELECT j.*
+        FROM jogadores j
+        WHERE j.numero = :numero
+        AND j.id_clube = :id_clube;';
+        $stmt = Connection::getConnection()->prepare($sql);
+        $stmt->bindParam(':numero', $numero, PDO::PARAM_INT);
+        $stmt->bindParam(':id_clube', $idClube, PDO::PARAM_INT);
+        $stmt->execute();
+        $camisaIgual = $stmt->fetchAll();
+
+        //Número
+        if (!$jogador->getNumero()) {
+            array_push($erros, "Erro");
+        } elseif ($jogador->getNumero() < 1 || $jogador->getNumero() > 99) {
+            array_push($erros, "Erro");
+        } elseif (count($camisaIgual) > 0) {
+            array_push($erros, "Erro");
         }
 
-        //Validar curso
-        if(! $jogador->getNomeUniforme()) {
-            array_push($erros, "Informe o nome no uniforme!");
+        //Nome no uniforme
+        if (!$jogador->getNomeUniforme()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $jogador->getAltura()) {
-            array_push($erros, "Informe a altura do jogador!");
+        //Altura
+        if (!$jogador->getAltura()) {
+            array_push($erros, "Erro");
+        } elseif ($jogador->getAltura() < 140) {
+            array_push($erros, "Erro");
+        } elseif ($jogador->getAltura() > 220) {
+            array_push($erros, "Erro");
         }
 
-        if(! $jogador->getPeso()) {
-            array_push($erros, "Informe o peso do jogador!");
+        //Peso
+        if (!$jogador->getPeso()) {
+            array_push($erros, "Erro");
+        } elseif ($jogador->getPeso() < 50) {
+            array_push($erros, "Erro");
+        } elseif ($jogador->getPeso() > 190) {
+            array_push($erros, "Erro");
         }
 
-        if($jogador->getPeso() > 150) {
-            array_push($erros, "Um jogador não pode ser tão pesado!");
+        //Pé
+        if (!$jogador->getPe()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $jogador->getPe()) {
-            array_push($erros, "Informe se o jogador é destro, canhoto ou ambidestro!");
+        //País
+        if (!$jogador->getPais()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $jogador->getPais()) {
-            array_push($erros, "Informe o país do jogador!");
+        //Posição
+        if (!$jogador->getPosicao()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $jogador->getPosicao()) {
-            array_push($erros, "Informe a posição do jogador!");
-        }
-
-        if(! $jogador->getClube()) {
-            array_push($erros, "Informe o clube do jogador!");
+        if (!$jogador->getClube()) {
+            array_push($erros, "Erro");
         }
 
         return $erros;
     }
-
 }

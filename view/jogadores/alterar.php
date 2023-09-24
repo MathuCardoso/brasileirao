@@ -38,7 +38,18 @@ if(isset($_POST['submetido'])) {
     $jogador->setPeso($peso);
     $jogador->setPe($pe);
     $jogador->setPais($pais);
-    $jogador->setPosicao($posicao);
+    $jogador->setPosicao($posicao);~
+
+    
+    $sql = 'SELECT j.*
+    FROM jogadores j
+    WHERE j.numero = :numero
+    AND j.id_clube = :id_clube;';
+    $stmt = Connection::getConnection()->prepare($sql);
+    $stmt->bindParam(':numero', $numero, PDO::PARAM_INT);
+    $stmt->bindParam(':id_clube', $idClube, PDO::PARAM_INT);
+    $stmt->execute();
+    $camisaIgual = $stmt->fetchAll();
 
     $clube = new Clube();
     $clube->setId($idClube);
@@ -52,9 +63,6 @@ if(isset($_POST['submetido'])) {
         //Redirecionar para o listar
         header("location: listar.php");
         exit;
-    } else { //Em caso de erros, exibí-los
-        $msgErro = implode("<br>", $erros);
-        //print_r($erros);
     }
 
 }else {
