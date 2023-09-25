@@ -1,8 +1,6 @@
 <?php
 //Formulário para jogadores
 
-
-require_once(__DIR__ . "/../../controller/ClubeController.php");
 require_once(__DIR__ . "/../../controller/ClubeController.php");
 require_once(__DIR__ . "/../include/header.php");
 
@@ -19,7 +17,7 @@ $clubes = $clubeCont->listar();
     }
 </style>
 
-<form id="formJogador" method="POST" class="row g-3 mt-2 needs-validation" novalidate>
+<form id="formJogador" method="POST" class="row g-3 mt-2 needs-validation">
 
     <!--Nome do Jogador-->
     <div class="col-md-6">

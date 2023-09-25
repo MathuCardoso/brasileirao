@@ -1,46 +1,62 @@
-<?php 
+<?php
 //Classe service para aluno
 
-require_once(__DIR__ . "/../model/clube.php");
+require_once(__DIR__ . "/../model/Clube.php");
 
-class ClubeService {
+class ClubeService
+{
 
-    public function validarDados(Clube $clube) {
+    public function validarDados(Clube $clube)
+    {
         $erros = array();
-        
+
         //Validar o nome
-        if(! $clube->getNomeClube()) {
-            array_push($erros, "Informe o nome!");
+        if (!$clube->getNomeClube()) {
+            array_push($erros, "Erro");
+        }elseif (strlen($clube->getNomeClube()) <= 3) {
+            array_push($erros, "Erro");
         }
 
-        //Validar a idade
-        if(! $clube->getIniciais()) {
-            array_push($erros, "Informe a data de nascimento do clube$clube!");
+        //Validar as iniciais
+        if (!$clube->getIniciais()) {
+            array_push($erros, "Erro");
+        }elseif (strlen($clube->getIniciais()) > 3) {
+            array_push($erros, "Erro");
+        } elseif (strlen($clube->getIniciais()) < 3) {
+            array_push($erros, "Erro");
         }
 
-        //Validar estrangeiro
-        if(! $clube->getEscudo()) {
-            array_push($erros, "Informe se o clube$clube é estrangeiro!");
+        //Validar sede
+        if (!$clube->getSede()) {
+            array_push($erros, "Erro");
         }
 
-        //Validar curso
-        if(! $clube->getEstadio()) {
-            array_push($erros, "Informe o curso!");
+        //Validar técnico
+        if (!$clube->getTecnico()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $clube->getCor1()) {
-            array_push($erros, "Informe o curso!");
+        //Validar cor 1
+        if (!$clube->getCor1()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $clube->getCor2()) {
-            array_push($erros, "Informe o curso!");
+        //Validar cor 2
+        if (!$clube->getCor2()) {
+            array_push($erros, "Erro");
         }
 
-        if(! $clube->getCor3()) {
-            array_push($erros, "Informe o curso!");
+        //Validar cor 3
+        if (!$clube->getCor3()) {
+            array_push($erros, "Erro");
         }
+
+        //Validar o estádio
+        if (!$clube->getEstadio()) {
+            array_push($erros, "Erro");
+        }
+
 
         return $erros;
     }
-
 }

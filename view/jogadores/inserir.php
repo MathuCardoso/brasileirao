@@ -6,14 +6,9 @@ require_once(__DIR__ . "/../../model/Jogador.php");
 require_once(__DIR__ . "/../../model/Clube.php");
 require_once(__DIR__ . "/../../dao/ClubeDAO.php");
 
-
 $jogador = null;
 $posicao = null;
 
-$sql = 'SELECT nome_clube FROM clubes';
-$stmt = Connection::getConnection()->prepare($sql);
-$stmt->execute();
-$clubes = $stmt->fetchAll();
 
 if (isset($_POST['submetido'])) {
     //echo "clicou no gravar";

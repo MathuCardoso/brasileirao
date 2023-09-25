@@ -33,10 +33,8 @@ CREATE TABLE jogadores (
   pe varchar(100) NOT NULL,
   nacionalidade varchar(100) NOT NULL,
   posicao varchar(50) NOT NULL,
-  id_favPosicao int NOT NULL, 
   id_clube int NOT NULL, 
   CONSTRAINT pk_jogadores PRIMARY KEY (id),
-  CONSTRAINT fk_favPosicao FOREIGN KEY (id_favPosicao) REFERENCES favPosicao (id),
   CONSTRAINT fk_clube FOREIGN KEY (id_clube) REFERENCES clubes (id)
 );
 

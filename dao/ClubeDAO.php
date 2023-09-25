@@ -16,24 +16,33 @@ class ClubeDAO
     public function insert(Clube $clube)
     {
         $sql = "INSERT INTO clubes" .
-            " (nome_clube, iniciais, escudo, tecnico, id_estadio, cor1, cor2, cor3)" .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            " (nome_clube, iniciais, sede, tecnico, escudo,  cor1, cor2, cor3, id_estadio)" .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),
             $clube->getIniciais(),
-            $clube->getEscudo(),
+            $clube->getSede(),
             $clube->getTecnico(),
-            $clube->getEstadio()->getId(),
+            $clube->getEscudo(),
             $clube->getCor1(),
             $clube->getCor2(),
-            $clube->getCor3()
+            $clube->getCor3(),
+            $clube->getEstadio()->getId()
         ]);
     }
 
     public function update(Clube $clube)
     {
-        $sql = "UPDATE clubes SET nome_clube = ?, iniciais = ?, escudo = ?, tecnico = ?, id_estadio = ?, cor1 = ?, cor2 = ?, cor3 = ? WHERE id = ?";
+        $sql = "UPDATE clubes SET 
+        nome_clube = ?, 
+        iniciais = ?, 
+        escudo = ?, 
+        tecnico = ?, 
+        id_estadio = ?, 
+        cor1 = ?, 
+        cor2 = ?, 
+        cor3 = ? WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),

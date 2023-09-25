@@ -5,6 +5,12 @@ class Estadio {
     private ?int $id;
     private ?string $nomeEstadio;
 
+    public function __construct()
+    {
+        $this->id = 0;
+        $this->nomeEstadio = null;
+    }
+
     /**
      * Get the value of id
      */ 

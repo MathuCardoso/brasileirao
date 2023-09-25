@@ -20,6 +20,7 @@ class Clube {
     {
         $this->id = 0;
         $this->estadio = null;
+        $this->sede = null;
     }
 
 

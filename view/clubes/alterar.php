@@ -6,9 +6,9 @@ require_once(__DIR__ . "/../../model/Clube.php");
 require_once(__DIR__ . "/../../model/Estadio.php");
 
 $msgErro = '';
-$aluno = null;
+$clube = null;
 
-$alunoCont = new ClubeController();
+$clubeCont = new ClubeController();
 
 
 
@@ -16,7 +16,7 @@ $alunoCont = new ClubeController();
 if(isset($_POST['submetido'])) {
     //Usuário clicou no botão gravar (submeteu o formulário)
     //Captura os campo do formulário
-    $nome = trim($_POST['nome_clube']) ? trim($_POST['nome_clube']) : null;
+    $nomeClube = trim($_POST['nome_clube']) ? trim($_POST['nome_clube']) : null;
     $iniciais = trim($_POST['iniciais']) ? trim($_POST['iniciais']) : null;
     $escudo = is_numeric($_POST['escudo']) ? $_POST['escudo'] : null;
     $sede = trim($_POST['sede']) ? trim($_POST['sede']) : null;
