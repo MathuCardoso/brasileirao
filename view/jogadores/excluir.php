@@ -1,5 +1,5 @@
 <?php
-//View para excluir um aluno
+//View para excluir um jogador
 
 require_once(__DIR__ . '/../../controller/JogadorController.php');
 

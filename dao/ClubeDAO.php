@@ -16,8 +16,8 @@ class ClubeDAO
     public function insert(Clube $clube)
     {
         $sql = "INSERT INTO clubes" .
-            " (nome_clube, iniciais, sede, tecnico, escudo,  cor1, cor2, cor3, id_estadio)" .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            " (nome_clube, iniciais, sede, tecnico, escudo,  cor1, cor2, id_estadio)" .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),
@@ -27,7 +27,6 @@ class ClubeDAO
             $clube->getEscudo(),
             $clube->getCor1(),
             $clube->getCor2(),
-            $clube->getCor3(),
             $clube->getEstadio()->getId()
         ]);
     }
@@ -39,28 +38,31 @@ class ClubeDAO
         iniciais = ?, 
         escudo = ?, 
         tecnico = ?, 
+        sede = ?, 
         id_estadio = ?, 
         cor1 = ?, 
-        cor2 = ?, 
-        cor3 = ? WHERE id = ?";
+        cor2 = ?
+        WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),
             $clube->getIniciais(),
             $clube->getEscudo(),
             $clube->getTecnico(),
+            $clube->getEstadio(),
             $clube->getEstadio()->getId(),
             $clube->getCor1(),
             $clube->getCor2(),
-            $clube->getCor3(),
             $clube->getId()
         ]);
     }
 
     public function deleteById(int $id)
     {
+        $conn = Connection::getConnection();
+
         $sql = "DELETE FROM clubes WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $conn->prepare($sql);
         $stmt->execute([$id]);
     }
 
@@ -76,22 +78,30 @@ class ClubeDAO
         return $this->mapBancoParaObjeto($result);
     }
 
-    public function findById(?int $id)
-    {
-        $sql = "SELECT * FROM clubes WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$id]);
-        $result = $stmt->fetchAll();
+    public function findById(int $id)
+{
+    $conn = Connection::getConnection();
 
-        $clubes = $this->mapBancoParaObjeto($result);
+    $sql = "SELECT c.*, e.nome_estadio" .
+    " FROM clubes c" .
+    " JOIN estadios e ON (e.id = c.id_estadio)" .
+    " WHERE c.id = ?";
 
-        if (count($clubes) == 1)
-            return $clubes[0];
-        elseif (count($clubes) == 0)
-            return null;
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$id]);
+    $result = $stmt->fetchAll();
 
-        die("ClubeDAO.findById - Erro: mais de um clube encontrado para o ID " . $id);
-    }
+    // Criar o objeto Jogador
+    $clubes = $this->mapBancoParaObjeto($result);
+
+    if (count($clubes) == 1)
+        return $clubes[0];
+    elseif (count($clubes) == 0)
+        return null;
+
+    die("JogadorDAO.findById - Erro: mais de um clube" .
+        " encontrado para o ID " . $id);
+}
 
     private function mapBancoParaObjeto($result)
     {
@@ -106,8 +116,7 @@ class ClubeDAO
                 ->setTecnico($reg['tecnico'])
                 ->setSede($reg['sede'])
                 ->setCor1($reg['cor1'])
-                ->setCor2($reg['cor2'])
-                ->setCor3($reg['cor3']);
+                ->setCor2($reg['cor2']);
 
             $estadio = new Estadio();
             $estadio->setId($reg['id_estadio']);

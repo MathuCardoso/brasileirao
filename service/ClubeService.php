@@ -46,11 +46,6 @@ class ClubeService
             array_push($erros, "Erro");
         }
 
-        //Validar cor 3
-        if (!$clube->getCor3()) {
-            array_push($erros, "Erro");
-        }
-
         //Validar o estádio
         if (!$clube->getEstadio()) {
             array_push($erros, "Erro");

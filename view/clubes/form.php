@@ -102,7 +102,7 @@ $estadios = $estadioCont->listar();
     </div>
 
     <!--Cor 1-->
-    <div class="col-md-2">
+    <div class="col-md-3">
         <label for="color1" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -119,7 +119,7 @@ $estadios = $estadioCont->listar();
     </div>
 
     <!--Cor 2-->
-    <div class="col-md-2">
+    <div class="col-md-3">
         <label for="color2" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -135,25 +135,8 @@ $estadios = $estadioCont->listar();
         <input type="color" name="cor2" class="form-control fs-5" id="color2" value="<?php echo ($clube ? $clube->getCor2() : ''); ?>">
     </div>
 
-    <!--Cor 3-->
-    <div class="col-md-2">
-        <label for="color3" class="form-label fs-5">
-            <?php
-            if (isset($_POST['submetido'])) {
-
-                if (!$cor3) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Cor 3:</p>";
-                } elseif ($cor3) {
-                    echo "<p class='mb-0 fw-bold text-success'>$cor3</p>";
-                }
-            } else echo "Cor 3";
-            ?></label>
-        <br>
-        <input type="color" name="cor3" class="form-control fs-5" id="color3" value="<?php echo ($clube ? $clube->getCor3() : ''); ?>">
-    </div>
-
     <!--Estádio do clube-->
-    <div class="col-md-6">
+    <div class="col-md-6 mb-4">
         <label for="estadio" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -167,10 +150,6 @@ $estadios = $estadioCont->listar();
             ?></label>
         <br>
 
-        <?php
-            if($clube)
-            print_r($clube->getEstadio());
-        ?>
         <select id="estadio" name="id_estadio" class="form-select">
             <option value=""></option>
 
@@ -188,9 +167,11 @@ $estadios = $estadioCont->listar();
     <input type="hidden" name="id" value="<?php echo ($jogador ? $jogador->getId() : 0); ?>" />
     <input type="hidden" name="submetido" value="1">
 
-        <button type="submit" class="btn btn-success mx-auto col-md-2 fs-5">Cadastrar</button>
-        <button type="reset" class="btn btn-info mx-auto col-md-2 fs-5">Limpar</button>
-        <a href="listar.php" class="btn btn-outline-secondary mx-auto col-md-2 fs-5">Voltar</a>
+    <div class="row mt-3">
+        <button type="submit" class="btn btn-success mx-auto col-md-4 fs-5">Cadastrar</button>
+        <button type="reset" class="btn btn-info mx-auto col-md-4 fs-5">Limpar</button>
+        <a href="listar.php" class="btn btn-outline-secondary mx-auto col-md-3 fs-5">Voltar</a>
+    </div>
     </div>
 </form>
 

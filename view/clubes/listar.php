@@ -15,10 +15,10 @@ $clubes = $clubeCont->listar();
 require(__DIR__ . "/../include/header.php");
 ?>
 
-<h4>Listagem de clubes</h4>
+<h2 class="mt-4 text-center">Listagem de clubes</h2>
 
 <div>
-    <a class="btn btn-success" href="inserir.php">Inserir</a>
+    <a class="btn btn-primary mt-1 mb-3" href="inserir.php">Cadastrar clube</a>
 </div>
 
 <div class="row">
@@ -26,7 +26,7 @@ require(__DIR__ . "/../include/header.php");
     <?php foreach ($clubes as $c) : ?>
 
 
-        <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-clubes col-md-6" style="max-width: 540px; border: 2px solid <?= $c->getCor2();?>;">
+        <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-clubes col-md-6" style="max-width: 540px; border: 3px solid <?= $c->getCor1();?>;">
 
         <style>
             .card-clubes:hover{
@@ -37,13 +37,13 @@ require(__DIR__ . "/../include/header.php");
                 <div class="col-md-4" style="text-align: center;">
                     <img src="../../assets/74472.png" class="img-fluid rounded-start">
                     <div class="outros text-center">
-                        <a class="text-info mr-1" href="alterar.php?idJogador=<?= $c->getId() ?>">Editar</a>
-                        <a class="text-danger ml-1" href="excluir.php?idJogador=<?= $c->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                        <a class="text-info mr-1" href="alterar.php?idClube=<?= $c->getId() ?>">Editar</a>
+                        <a class="text-danger ml-1" href="excluir.php?idClube=<?= $c->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
                     </div>
                 </div>
                 <div class="col-md-8 px-0">
                     <div class="card-title">
-                        <h4 class="card-title mb-0" style="color: <?= $c->getCor1();?>;"><?php echo $c->getNomeClube(); ?></h4>
+                        <h4 class="card-title mb-0 fs-2" style="color: <?= $c->getCor2();?>;"><?php echo $c->getNomeClube(); ?></h4>
                     </div>
                     <div class="card-body d-flex p-0">
                         <div class="card-body p-0">

@@ -1,3 +1,4 @@
+-- Active: 1694899644536@@127.0.0.1@3306@brasileirao
 /* TABELA estadios */
 CREATE TABLE estadios ( 
   id int AUTO_INCREMENT NOT NULL, 
@@ -43,4 +44,34 @@ INSERT INTO estadios (nome_estadio) VALUES ('Maracanã');
 INSERT INTO estadios (nome_estadio) VALUES ('São januário');
 INSERT INTO estadios (nome_estadio) VALUES ('Neo Química Arena');
 INSERT INTO estadios (nome_estadio) VALUES ('Vila Belmiro');
+INSERT INTO estadios (nome_estadio) VALUES ('Nilton Santos');
+INSERT INTO estadios (nome_estadio) VALUES ('Allianz Parque');
+INSERT INTO estadios (nome_estadio) VALUES ('Arena do Grêmio');
+INSERT INTO estadios (nome_estadio) VALUES ('Arena Red Bull');
+INSERT INTO estadios (nome_estadio) VALUES ('Ligga Arena');
+INSERT INTO estadios (nome_estadio) VALUES ('Arena Castelão');
+INSERT INTO estadios (nome_estadio) VALUES ('Arena MRV');
+INSERT INTO estadios (nome_estadio) VALUES ('Arena Pantanal');
+INSERT INTO estadios (nome_estadio) VALUES ('Mineirão');
+INSERT INTO estadios (nome_estadio) VALUES ('Beira-Rio');
+INSERT INTO estadios (nome_estadio) VALUES ('Morumbi');
+INSERT INTO estadios (nome_estadio) VALUES ('Hailé Pinheiro - Serrinha');
+INSERT INTO estadios (nome_estadio) VALUES ('Itaipava Arena');
+INSERT INTO estadios (nome_estadio) VALUES ('Arena Independência');
+INSERT INTO estadios (nome_estadio) VALUES ('Couto Pereira');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

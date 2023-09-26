@@ -25,7 +25,6 @@ if (isset($_POST['submetido'])) {
     $tecnico = trim($_POST['tecnico']) ? ($_POST['tecnico']) : null;
     $cor1 = trim($_POST['cor1']) ? trim($_POST['cor1']) : null;
     $cor2 = trim($_POST['cor2']) ? trim($_POST['cor2']) : null;
-    $cor3 = trim($_POST['cor3']) ? trim($_POST['cor3']) : null;
     $idEstadio = is_numeric($_POST['id_estadio']) ? $_POST['id_estadio'] : null;
 
     //echo $idEstadio;
@@ -42,7 +41,6 @@ if (isset($_POST['submetido'])) {
     $clube->setEscudo($escudo);
     $clube->setCor1($cor1);
     $clube->setCor2($cor2);
-    $clube->setCor3($cor3);
     $clube->setEstadio($estadio);
     
 

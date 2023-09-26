@@ -8,18 +8,18 @@ $idClube = 0;
 if(isset($_GET['idClube']))
     $idClube = $_GET['idClube'];
 
-//Carregar o aluno 
-$ClubeCont = new ClubeController();   
+//Carregar o clube 
+$clubeCont = new ClubeController();   
 $clube = $clubeCont->buscarPorId($idClube);
 
-//Verificar se o aluno existe
+//Verificar se o clube existe
 if(! $clube) {
-    echo "Aluno não encontrado!<br>";
+    echo "clube não encontrado!<br>";
     echo "<a href='listar.php'>Voltar</a>";
     exit;
 }
 
-//Excluir o aluno
+//Excluir o clube
 $clubeCont->excluirPorId($clube->getId());
 
 //Redirecionar para a listar

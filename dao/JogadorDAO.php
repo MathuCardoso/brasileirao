@@ -86,7 +86,7 @@ public function findById(int $id)
 {
     $conn = Connection::getConnection();
 
-    $sql = "SELECT a.*, c.nome_clube" . // Use "c.nome_clube" em vez de "c.nome"
+    $sql = "SELECT a.*, c.nome_clube" .
         " FROM jogadores a" .
         " JOIN clubes c ON (c.id = a.id_clube)" .
         " WHERE a.id = ?";

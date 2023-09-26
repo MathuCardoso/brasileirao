@@ -185,26 +185,6 @@ class Clube {
     }
 
     /**
-     * Get the value of cor3
-     */ 
-    public function getCor3()
-    {
-        return $this->cor3;
-    }
-
-    /**
-     * Set the value of cor3
-     *
-     * @return  self
-     */ 
-    public function setCor3($cor3)
-    {
-        $this->cor3 = $cor3;
-
-        return $this;
-    }
-
-    /**
      * Get the value of estadio
      */ 
     public function getEstadio()
