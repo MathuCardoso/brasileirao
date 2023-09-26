@@ -166,6 +166,11 @@ $estadios = $estadioCont->listar();
             } else echo "Estádio do clube";
             ?></label>
         <br>
+
+        <?php
+            if($clube)
+            print_r($clube->getEstadio());
+        ?>
         <select id="estadio" name="id_estadio" class="form-select">
             <option value=""></option>
 

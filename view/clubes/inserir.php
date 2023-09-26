@@ -22,15 +22,18 @@ if (isset($_POST['submetido'])) {
     }
     
     $sede = trim($_POST['sede']) ? trim($_POST['sede']) : null;
-    $tecnico = isset($_POST['tecnico']) ? ($_POST['tecnico']) : null;
+    $tecnico = trim($_POST['tecnico']) ? ($_POST['tecnico']) : null;
     $cor1 = trim($_POST['cor1']) ? trim($_POST['cor1']) : null;
     $cor2 = trim($_POST['cor2']) ? trim($_POST['cor2']) : null;
     $cor3 = trim($_POST['cor3']) ? trim($_POST['cor3']) : null;
-    $idEstadio = isset($_POST['id_estadio']) ? isset($_POST['id_estadio']) : null;
+    $idEstadio = is_numeric($_POST['id_estadio']) ? $_POST['id_estadio'] : null;
 
+    //echo $idEstadio;
+    //exit;
+    
     $estadioDAO = new EstadioDAO();
     $estadio = $estadioDAO->findById($idEstadio);
-
+    
     $clube = new Clube();
     $clube->setNomeClube($nomeClube);
     $clube->setIniciais($iniciais);
@@ -40,10 +43,12 @@ if (isset($_POST['submetido'])) {
     $clube->setCor1($cor1);
     $clube->setCor2($cor2);
     $clube->setCor3($cor3);
+    $clube->setEstadio($estadio);
+    
 
     $clubeCont = new ClubeController();
     $erros = $clubeCont->inserir($clube);
-
+    
     if (!$erros) { //Caso não tenha erros
         //Redirecionar para o listar
         header("location: listar.php");

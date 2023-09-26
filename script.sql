@@ -2,7 +2,7 @@
 CREATE TABLE estadios ( 
   id int AUTO_INCREMENT NOT NULL, 
   nome_estadio varchar(70) NOT NULL,
-  CONSTRAINT pk_clubes PRIMARY KEY (id)
+  CONSTRAINT pk_estadios PRIMARY KEY (id)
 );
 
 /* TABELA clubes */
@@ -39,8 +39,8 @@ CREATE TABLE jogadores (
 );
 
 /* INSERTs estadios */
-INSERT INTO estadios (nome) VALUES ('Maracanã');
-INSERT INTO estadios (nome) VALUES ('São januário');
-INSERT INTO estadios (nome) VALUES ('Neo Química Arena');
-INSERT INTO estadios (nome) VALUES ('Vila Belmiro');
+INSERT INTO estadios (nome_estadio) VALUES ('Maracanã');
+INSERT INTO estadios (nome_estadio) VALUES ('São januário');
+INSERT INTO estadios (nome_estadio) VALUES ('Neo Química Arena');
+INSERT INTO estadios (nome_estadio) VALUES ('Vila Belmiro');
 

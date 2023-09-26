@@ -72,7 +72,7 @@ class JogadorDAO
 
     public function list()
 {
-    $sql = "SELECT j.*, c.nome_clube" . // Use "c.nome_clube" em vez de "c.nome"
+    $sql = "SELECT j.*, c.nome_clube" . 
         " FROM jogadores j" .
         " JOIN clubes c ON (c.id = j.id_clube)" .
         " ORDER BY j.id_clube";

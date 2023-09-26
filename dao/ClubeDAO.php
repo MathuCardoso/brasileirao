@@ -66,7 +66,10 @@ class ClubeDAO
 
     public function list()
     {
-        $sql = "SELECT * FROM clubes ORDER BY nome_clube";
+        $sql = "SELECT c.*, e.nome_estadio " . 
+            " FROM clubes c" . 
+            " JOIN estadios e ON(e.id = c.id_estadio)" .
+            " ORDER BY nome_clube";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -101,12 +104,14 @@ class ClubeDAO
                 ->setIniciais($reg['iniciais'])
                 ->setEscudo($reg['escudo'])
                 ->setTecnico($reg['tecnico'])
+                ->setSede($reg['sede'])
                 ->setCor1($reg['cor1'])
                 ->setCor2($reg['cor2'])
                 ->setCor3($reg['cor3']);
 
             $estadio = new Estadio();
             $estadio->setId($reg['id_estadio']);
+            $estadio->setNomeEstadio($reg['nome_estadio']);
 
             $clube->setEstadio($estadio);
 
