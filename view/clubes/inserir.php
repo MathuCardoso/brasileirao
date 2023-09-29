@@ -7,6 +7,7 @@ require_once(__DIR__ . "/../../model/Estadio.php");
 require_once(__DIR__ . "/../../dao/EstadioDAO.php");
 
 $clube = null;
+$divisao = null;
 
 if (isset($_POST['submetido'])) {
     //Usuário clicou no botão gravar (submeteu o formulário)
@@ -23,6 +24,8 @@ if (isset($_POST['submetido'])) {
     
     $sede = trim($_POST['sede']) ? trim($_POST['sede']) : null;
     $tecnico = trim($_POST['tecnico']) ? ($_POST['tecnico']) : null;
+    $presidente = trim($_POST['presidente']) ? ($_POST['presidente']) : null;
+    $divisao = trim($_POST['divisao']) ? ($_POST['divisao']) : null;
     $cor1 = trim($_POST['cor1']) ? trim($_POST['cor1']) : null;
     $cor2 = trim($_POST['cor2']) ? trim($_POST['cor2']) : null;
     $idEstadio = is_numeric($_POST['id_estadio']) ? $_POST['id_estadio'] : null;
@@ -38,6 +41,8 @@ if (isset($_POST['submetido'])) {
     $clube->setIniciais($iniciais);
     $clube->setSede($sede);
     $clube->setTecnico($tecnico);
+    $clube->setPresidente($presidente);
+    $clube->setDivisao($divisao);
     $clube->setEscudo($escudo);
     $clube->setCor1($cor1);
     $clube->setCor2($cor2);

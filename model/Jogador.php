@@ -15,6 +15,7 @@ class Jogador
     private ?string $pe;
     private ?string $pais;
     private ?string $posicao;
+    private ?string $foto;
     private ?Clube $clube;
 
     public function __construct()
@@ -239,6 +240,26 @@ class Jogador
     public function setPosicao($posicao)
     {
         $this->posicao = $posicao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of foto
+     */ 
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * Set the value of foto
+     *
+     * @return  self
+     */ 
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
 
         return $this;
     }

@@ -10,9 +10,10 @@ class Clube {
     private ?string $escudo;
     private ?string $sede;
     private ?string $tecnico;
+    private ?string $presidente;
+    private ?string $divisao;
     private ?string $cor1;
     private ?string $cor2;
-    private ?string $cor3;
     private ?Estadio $estadio;
 
 
@@ -20,6 +21,7 @@ class Clube {
     {
         $this->id = 0;
         $this->estadio = null;
+        $this->divisao = null;
         $this->sede = null;
     }
 
@@ -200,6 +202,46 @@ class Clube {
     public function setEstadio($estadio)
     {
         $this->estadio = $estadio;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of presidente
+     */ 
+    public function getPresidente()
+    {
+        return $this->presidente;
+    }
+
+    /**
+     * Set the value of presidente
+     *
+     * @return  self
+     */ 
+    public function setPresidente($presidente)
+    {
+        $this->presidente = $presidente;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of divisao
+     */ 
+    public function getDivisao()
+    {
+        return $this->divisao;
+    }
+
+    /**
+     * Set the value of divisao
+     *
+     * @return  self
+     */ 
+    public function setDivisao($divisao)
+    {
+        $this->divisao = $divisao;
 
         return $this;
     }

@@ -11,7 +11,7 @@ CREATE TABLE clubes (
   id int AUTO_INCREMENT NOT NULL, 
   nome_clube varchar(70) NOT NULL,
   iniciais varchar(3) NOT NULL,
-  escudo longblob NOT NULL,
+  escudo VARCHAR(100) NOT NULL,
   sede varchar(70) NOT NULL,
   tecnico varchar(70) NOT NULL,
   id_estadio int NOT NULL,
@@ -38,6 +38,16 @@ CREATE TABLE jogadores (
   CONSTRAINT pk_jogadores PRIMARY KEY (id),
   CONSTRAINT fk_clube FOREIGN KEY (id_clube) REFERENCES clubes (id)
 );
+
+/*Alter Tables */
+ALTER TABLE clubes
+ADD presidente VARCHAR(70) NOT NULL;
+
+ALTER TABLE clubes
+ADD divisao VARCHAR(20) NOT NULL;
+
+ALTER TABLE jogadores
+ADD perfil VARCHAR(100) NOT NULL;
 
 /* INSERTs estadios */
 INSERT INTO estadios (nome_estadio) VALUES ('Maracanã');

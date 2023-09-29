@@ -8,7 +8,6 @@ require_once(__DIR__ . "/../../controller/ClubeController.php");
 
 $clubeCont = new ClubeController();
 $clubes = $clubeCont->listar();
-//print_r($alunos);
 ?>
 
 <?php 
@@ -27,33 +26,41 @@ require(__DIR__ . "/../include/header.php");
 
 
         <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-clubes col-md-6" style="max-width: 540px; border: 3px solid <?= $c->getCor1();?>;">
-
-        <style>
-            .card-clubes:hover{
-                border: 2px solid white;
-            }
-        </style>
             <div class="row pr-0">
-                <div class="col-md-4" style="text-align: center;">
-                    <img src="../../assets/74472.png" class="img-fluid rounded-start">
-                    <div class="outros text-center">
-                        <a class="text-info mr-1" href="alterar.php?idClube=<?= $c->getId() ?>">Editar</a>
-                        <a class="text-danger ml-1" href="excluir.php?idClube=<?= $c->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                <div class="col-md-4 px-0" style="text-align: center; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <img class="mt-4 p-3" style="width: 100%;" src="<?php
+
+                    if($c->getEscudo()){
+                        echo$c->getEscudo();
+                    }else{
+                        echo "./../../assets/74472.png";
+                    }
+                    ?>" class="img-fluid rounded-start">
+                    <div class="outros text-center mt-3">
+                        <a class="text-info mr-1 fs-5" href="alterar.php?idClube=<?= $c->getId() ?>">Editar</a>
+                        <a class="text-danger ml-1 fs-5" href="excluir.php?idClube=<?= $c->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
                     </div>
                 </div>
                 <div class="col-md-8 px-0">
                     <div class="card-title">
-                        <h4 class="card-title mb-0 fs-2" style="color: <?= $c->getCor2();?>;"><?php echo $c->getNomeClube(); ?></h4>
+                        <h4 class="card-title mb-0 fs-2 fw-bold" style="color: <?= $c->getCor2();?>;"><?php echo $c->getNomeClube(); ?></h4>
                     </div>
-                    <div class="card-body d-flex p-0">
+                    <div class="card-body d-flex py-0 pl-0 pr-0">
                         <div class="card-body p-0">
-                            <p class="card-text fw-bold mb-0">Iniciais: <?php echo "<span class='fw-normal'>" . $c->getIniciais() . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Técnico: <?php echo "<span class='fw-normal'>" . $c->getTecnico() ."</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Sede: <?php echo "<span class='fw-normal'>" . $c->getSede() . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Estádio: <?php  $estadio = $c->getEstadio();
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Iniciais: <?php echo "<br><span class='fw-normal'>" . $c->getIniciais() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Técnico: <?php echo "<br><span class='fw-normal'>" . $c->getTecnico() ."</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Sede: <?php echo "<br><span class='fw-normal'>" . $c->getSede() . "</span>"; ?></p>
+
+                        </div>
+                        <div class="card-body py-0 pl-0 pr-0">
+                        <p class="card-text fw-bold mb-0 py-1 fs-5">Estádio: <?php  $estadio = $c->getEstadio();
                                                                         if ($estadio) {
-                                                                            echo "<span class='fw-normal'>" . $estadio->getNomeEstadio() . "</span>";
-                                                                        } ?></p>
+                                                                            echo "<br><span class='fw-normal'>" . $estadio->getNomeEstadio() . "</span>";
+                                                                        } ?></p>                            <p class="card-text fw-bold mb-0">
+                                                                            
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Presidente: <?php echo "<br><span class='fw-normal'>" . $c->getPresidente() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Divisão: <?php echo "<br><span class='fw-normal'>" . $c->getDivisao() . "</span>"; ?></p>
+
                         </div>
                     </div>
                 </div>

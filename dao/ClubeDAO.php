@@ -16,8 +16,8 @@ class ClubeDAO
     public function insert(Clube $clube)
     {
         $sql = "INSERT INTO clubes" .
-            " (nome_clube, iniciais, sede, tecnico, escudo,  cor1, cor2, id_estadio)" .
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            " (nome_clube, iniciais, sede, tecnico, escudo, presidente, divisao, cor1, cor2, id_estadio)" .
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             $clube->getNomeClube(),
@@ -25,6 +25,8 @@ class ClubeDAO
             $clube->getSede(),
             $clube->getTecnico(),
             $clube->getEscudo(),
+            $clube->getPresidente(),
+            $clube->getDivisao(),
             $clube->getCor1(),
             $clube->getCor2(),
             $clube->getEstadio()->getId()
@@ -38,6 +40,8 @@ class ClubeDAO
         iniciais = ?, 
         escudo = ?, 
         tecnico = ?, 
+        presidente = ?,
+        divisao = ?,
         sede = ?, 
         id_estadio = ?, 
         cor1 = ?, 
@@ -49,6 +53,8 @@ class ClubeDAO
             $clube->getIniciais(),
             $clube->getEscudo(),
             $clube->getTecnico(),
+            $clube->getPresidente(),
+            $clube->getDivisao(),
             $clube->getEstadio(),
             $clube->getEstadio()->getId(),
             $clube->getCor1(),
@@ -114,6 +120,8 @@ class ClubeDAO
                 ->setIniciais($reg['iniciais'])
                 ->setEscudo($reg['escudo'])
                 ->setTecnico($reg['tecnico'])
+                ->setPresidente($reg['presidente'])
+                ->setDivisao($reg['divisao'])
                 ->setSede($reg['sede'])
                 ->setCor1($reg['cor1'])
                 ->setCor2($reg['cor2']);

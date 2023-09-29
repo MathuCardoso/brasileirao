@@ -187,7 +187,7 @@ $clubes = $clubeCont->listar();
 
     <!--Posição-->
     <div class="form-check col-md-6">
-        <label class="form-label fs-5">
+        <label class="form-label fs-6">
             <?php
             if (isset($_POST['submetido'])) {
 
@@ -214,7 +214,7 @@ $clubes = $clubeCont->listar();
     </div>
 
     <!--Clube do jogador-->
-    <div class="col-md-6">
+    <div class="col-md-3">
         <label for="clube" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -243,6 +243,13 @@ $clubes = $clubeCont->listar();
                 </option>
             <?php endforeach; ?>
         </select>
+    </div>
+
+    <!--Foto do jogador-->
+    <div class="col-md-3">
+        <label for="foto" class="form-label fs-5">Foto do jogador:</label>
+        <br>
+        <input type="file" name="foto" class="form-control fs-5" id="foto" accept="image/" value="<?php echo isset($_POST['foto']) ? $_POST['foto'] : ($jogador ? $jogador->getFoto() : ''); ?>">
     </div>
 
     <input type="hidden" name="id" value="<?php echo ($jogador ? $jogador->getId() : 0); ?>" />

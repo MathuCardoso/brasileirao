@@ -23,6 +23,12 @@ if (isset($_POST['submetido'])) {
     $pais = trim($_POST['pais']) ? trim($_POST['pais']) : null;
     $posicao = isset($_POST['posicao']) ? trim($_POST['posicao']) : null;
     $idClube = trim($_POST['id_clube']) ? trim($_POST['id_clube']) : null;
+    if (isset($_FILES['foto']) && !empty($_FILES['foto'])) {
+        $foto = "./img/" . $_FILES['foto']['name'];
+        move_uploaded_file($_FILES['foto']['tmp_name'], $foto);
+    }else{
+        $foto = "";
+    }
 
     $sql = 'SELECT j.*
     FROM jogadores j
@@ -49,7 +55,8 @@ if (isset($_POST['submetido'])) {
     $jogador->setPe($pe);
     $jogador->setPais($pais);
     $jogador->setPosicao($posicao);
-    $jogador->setClube($clube); // Aqui atribuímos o objeto Clube ao jogador
+    $jogador->setClube($clube);
+    $jogador->setFoto($posicao);
 
     // Agora você pode prosseguir com a inserção do jogador
     $jogadorCont = new JogadorController();

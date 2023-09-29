@@ -21,7 +21,7 @@ $estadios = $estadioCont->listar();
 <form id="formClube" method="POST" class="row g-3 mt-2" enctype="multipart/form-data">
 
     <!--Nome do clube-->
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label for="txtNomeClube" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -40,7 +40,7 @@ $estadios = $estadioCont->listar();
     </div>
 
     <!--Iniciais do clube-->
-    <div class="col-md-6">
+    <div class="col-md-3">
         <label for="iniciais" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -60,8 +60,15 @@ $estadios = $estadioCont->listar();
         <input placeholder="Iniciais do clube. Ex: FLA" type="text" name="iniciais" class="form-control fs-5" id="iniciais" value="<?php echo ($clube ? $clube->getIniciais() : ''); ?>" />
     </div>
 
+    <!--Escudo-->
+    <div class="col-md-5">
+        <label for="escudo" class="form-label fs-5">Escudo:</label>
+        <br>
+        <input type="file" name="escudo" class="form-control fs-5" id="escudo" accept="image/" value="<?php echo isset($_POST['escudo']) ? $_POST['escudo'] : ($clube ? $clube->getEscudo() : ''); ?>">
+    </div>
+
     <!--Sede-->
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label for="sede" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -78,7 +85,7 @@ $estadios = $estadioCont->listar();
     </div>
 
     <!--Técnico-->
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label for="tecnico" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -94,15 +101,25 @@ $estadios = $estadioCont->listar();
         <input placeholder="Nome do técnico do clube" type="text" name="tecnico" class="form-control fs-5" id="tecnico" value="<?php echo ($clube ? $clube->getTecnico() : ''); ?>" />
     </div>
 
-    <!--Escudo-->
-    <div class="col-md-6">
-        <label for="escudo" class="form-label fs-5">Escudo:</label>
+    <!--Presidente-->
+    <div class="col-md-4">
+        <label for="presidente" class="form-label fs-5">
+            <?php
+            if (isset($_POST['submetido'])) {
+
+                if (!$presidente) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Presidente:</p>";
+                } elseif ($presidente) {
+                    echo "<p class='mb-0 fw-bold text-success'>" . $presidente . "</p>";
+                }
+            } else echo "Presidente:";
+            ?></label>
         <br>
-        <input type="file" name="escudo" class="form-control fs-5" id="escudo" accept="image/" value="<?php echo isset($_POST['escudo']) ? $_POST['escudo'] : ($clube ? $clube->getEscudo() : ''); ?>">
+        <input placeholder="Nome do presidente do clube" type="text" name="presidente" class="form-control fs-5" id="presidente" value="<?php echo ($clube ? $clube->getPresidente() : ''); ?>" />
     </div>
 
     <!--Cor 1-->
-    <div class="col-md-3">
+    <div class="col-md-2">
         <label for="color1" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -119,7 +136,7 @@ $estadios = $estadioCont->listar();
     </div>
 
     <!--Cor 2-->
-    <div class="col-md-3">
+    <div class="col-md-2">
         <label for="color2" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -136,7 +153,7 @@ $estadios = $estadioCont->listar();
     </div>
 
     <!--Estádio do clube-->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-4 mb-4">
         <label for="estadio" class="form-label fs-5">
             <?php
             if (isset($_POST['submetido'])) {
@@ -161,6 +178,38 @@ $estadios = $estadioCont->listar();
                     ?>
                 </option>
             <?php endforeach; ?>
+        </select>
+    </div>
+
+    <!--Divisão do clube-->
+    <div class="col-md-4 mb-4">
+        <label for="divisao" class="form-label fs-5">
+            <?php
+            if (isset($_POST['submetido'])) {
+
+                if (!$divisao) {
+                    echo "<p class='mb-0 fw-bold text-danger'>Divisão do clube:</p>";
+                } elseif ($Estadio) {
+                    echo "<p class='mb-0 fw-bold text-success'>Divisão do clube:</p>";
+                }
+            } else echo "Divisão do clube";
+            ?></label>
+        <br>
+
+        <select id="divisao" name="divisao" class="form-select">
+            <option value=""></option>
+
+            <option value="Série A" <?php echo ($clube && $clube->getDivisao() == 'Série A' ? 'selected' : ''); ?>>
+                Série A</option>
+
+            <option value="Série B" <?php echo ($clube && $clube->getDivisao() == 'Série B' ? 'selected' : ''); ?>>
+                Série B</option>
+
+            <option value="Série C" <?php echo ($clube && $clube->getDivisao() == 'Série C' ? 'selected' : ''); ?>>
+                Série C</option>
+
+            <option value="Série D" <?php echo ($clube && $clube->getDivisao() == 'Série D' ? 'selected' : ''); ?>>
+                Série D</option>
         </select>
     </div>
 

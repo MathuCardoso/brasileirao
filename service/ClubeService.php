@@ -36,6 +36,16 @@ class ClubeService
             array_push($erros, "Erro");
         }
 
+        //Validar presidente
+        if (!$clube->getPresidente()) {
+            array_push($erros, "Erro");
+        }
+
+        //Validar divião
+        if (!$clube->getDivisao()) {
+            array_push($erros, "Erro");
+        }
+
         //Validar cor 1
         if (!$clube->getCor1()) {
             array_push($erros, "Erro");

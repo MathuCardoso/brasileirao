@@ -86,6 +86,7 @@ class JogadorService
             array_push($erros, "Erro");
         }
 
+        //Clube
         if (!$jogador->getClube()) {
             array_push($erros, "Erro");
         }

@@ -32,28 +32,35 @@ require(__DIR__ . "/../../view/include/header.php");
         <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-jogadores" style="max-width: 540px; border: 5px solid black;">
             <div class="row pr-0">
                 <div class="col-md-4">
-                    <img src="https://cdn-icons-png.flaticon.com/512/74/74472.png" class="img-fluid rounded-start" alt="...">
-                    <div class="outros text-center">
-                        <a class="text-info mr-1" href="alterar.php?idJogador=<?= $j->getId() ?>">Editar</a>
-                        <a class="text-danger ml-1" href="excluir.php?idJogador=<?= $j->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
+                    <img class="mt-4 p-3" style="width: 100%;" src="<?php
+
+                    if ($j->getFoto()) {
+                        echo $f->getFoto();
+                    } else {
+                        echo "./../../assets/74472.png";
+                    }
+                    ?>" class="img-fluid rounded-start">
+                    <div class="outros text-center ">
+                        <a class="text-info mr-1 fs-5" href="alterar.php?idJogador=<?= $j->getId() ?>">Editar</a>
+                        <a class="text-danger ml-1 fs-5" href="excluir.php?idJogador=<?= $j->getId() ?>" onclick="return confirm('Confirma a exclusão?');">Excluir</a>
                     </div>
                 </div>
                 <div class="col-md-8 px-0">
                     <div class="card-title">
-                        <h4 class="card-title mb-0"><?php echo $j->getNomeJogador(); ?></h4>
+                        <h4 class="card-title mb-0 fs-2 fw-bold"><?php echo $j->getNomeJogador(); ?></h4>
                     </div>
-                    <div class="card-body d-flex p-0">
+                    <div class="card-body d-flex py-0 pl-0 pr-0 p-0">
                         <div class="card-body p-0">
-                            <p class="card-text fw-bold mb-0">Idade: <?php echo "<span class='fw-normal'>" . $j->getIdade() . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Peso: <?php echo "<span class='fw-normal'>" . $j->getPeso() . "kg" . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Altura: <?php echo "<span class='fw-normal'>" . $j->getAltura() . "cm" . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Pé: <?php echo "<span class='fw-normal'>" . $j->getPe() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Idade: <?php echo "<span class='fw-normal'>" . $j->getIdade() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Peso: <?php echo "<span class='fw-normal'>" . $j->getPeso() . "kg" . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Altura: <?php echo "<span class='fw-normal'>" . $j->getAltura() . "cm" . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Pé: <?php echo "<span class='fw-normal'>" . $j->getPe() . "</span>"; ?></p>
                         </div>
                         <div class="card-body ml-3 p-0">
-                            <p class="card-text fw-bold mb-0">Número: <?php echo "<span class='fw-normal'>" . $j->getNumero() . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">País: <?php echo "<span class='fw-normal'>" . $j->getPais() . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Posicao: <?php echo "<span class='fw-normal'>" . $j->getPosicao() . "</span>"; ?></p>
-                            <p class="card-text fw-bold mb-0">Clube: <?php  $clube = $j->getClube();
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Número: <?php echo "<span class='fw-normal'>" . $j->getNumero() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">País: <?php echo "<span class='fw-normal'>" . $j->getPais() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Posicao: <?php echo "<span class='fw-normal'>" . $j->getPosicao() . "</span>"; ?></p>
+                            <p class="card-text fw-bold mb-0 py-1 fs-5">Clube: <?php $clube = $j->getClube();
                                                                         if ($clube) {
                                                                             echo "<span class='fw-normal'>" . $clube->getNomeClube() . "</span>";
                                                                         } ?></p>
