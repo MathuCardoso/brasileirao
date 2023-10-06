@@ -2,6 +2,7 @@
 //Classe service para aluno
 
 require_once(__DIR__ . "/../model/Jogador.php");
+require_once(__DIR__ . "/../dao/JogadorDAO.php");
 
 class JogadorService
 {
@@ -12,9 +13,9 @@ class JogadorService
 
         //Nome
         if (!$jogador->getNomeJogador()) {
-            array_push($erros, "Erro");
+            $erros['nomeJogador'] = "Nome do jogador:";
         } elseif (strlen($jogador->getNomeJogador()) <= 2) {
-            array_push($erros, "Erro");
+            $erros['nomeJogador'] = "Isso é realmente um nome?";
         }
 
         //Idade
@@ -25,50 +26,42 @@ class JogadorService
         } else if ($jogador->getIdade() > 50) {
             array_push($erros, "Erro");
         }
-
-        $numero = trim($_POST['numero']) ? trim($_POST['numero']) : null;
-        $idClube = trim($_POST['id_clube']) ? trim($_POST['id_clube']) : null;
-
-        $sql = 'SELECT j.*
-        FROM jogadores j
-        WHERE j.numero = :numero
-        AND j.id_clube = :id_clube;';
-        $stmt = Connection::getConnection()->prepare($sql);
-        $stmt->bindParam(':numero', $numero, PDO::PARAM_INT);
-        $stmt->bindParam(':id_clube', $idClube, PDO::PARAM_INT);
-        $stmt->execute();
-        $camisaIgual = $stmt->fetchAll();
-
+            
         //Número
         if (!$jogador->getNumero()) {
-            array_push($erros, "Erro");
+            $erros['numero'] = "Número:";
         } elseif ($jogador->getNumero() < 1 || $jogador->getNumero() > 99) {
-            array_push($erros, "Erro");
-        } elseif (count($camisaIgual) > 0) {
-            array_push($erros, "Erro");
+            $erros['numero'] = "Número entre 1 e 99:";
+        } elseif ($jogador->getClube()) {
+            $jogDao = new JogadorDAO();
+            $jogMesmoNumero = $jogDao->findByNumeroClube($jogador->getNumero(), 
+                                                         $jogador->getClube()->getId(),
+                                                         $jogador->getId());
+            if(count($jogMesmoNumero) > 0)
+                $erros['numero'] = "Escolha outro número!";
         }
 
         //Nome no uniforme
         if (!$jogador->getNomeUniforme()) {
-            array_push($erros, "Erro");
+            $erros['nome_uniforme'] = "Nome no uniforme:";
         }
 
         //Altura
         if (!$jogador->getAltura()) {
-            array_push($erros, "Erro");
+            $erros['altura'] = "Altura:";
         } elseif ($jogador->getAltura() < 140) {
-            array_push($erros, "Erro");
+            $erros['altura'] = "Jogador baixo de mais.";
         } elseif ($jogador->getAltura() > 220) {
-            array_push($erros, "Erro");
+            $erros['altura'] = "Jogador alto de mais.";
         }
 
         //Peso
         if (!$jogador->getPeso()) {
-            array_push($erros, "Erro");
+            $erros['peso'] = "Peso:";
         } elseif ($jogador->getPeso() < 50) {
-            array_push($erros, "Erro");
+            $erros['pwso'] = "Jogador leve de mais.";
         } elseif ($jogador->getPeso() > 190) {
-            array_push($erros, "Erro");
+            $erros['peso'] = "Jogador pesado de mais.";
         }
 
         //Pé

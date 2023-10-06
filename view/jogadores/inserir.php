@@ -8,6 +8,7 @@ require_once(__DIR__ . "/../../dao/ClubeDAO.php");
 
 $jogador = null;
 $posicao = null;
+$erros = array();
 
 
 if (isset($_POST['submetido'])) {
@@ -30,20 +31,6 @@ if (isset($_POST['submetido'])) {
         $foto = "";
     }
 
-    $sql = 'SELECT j.*
-    FROM jogadores j
-    WHERE j.numero = :numero
-    AND j.id_clube = :id_clube;';
-    $stmt = Connection::getConnection()->prepare($sql);
-    $stmt->bindParam(':numero', $numero, PDO::PARAM_INT);
-    $stmt->bindParam(':id_clube', $idClube, PDO::PARAM_INT);
-    $stmt->execute();
-    $camisaIgual = $stmt->fetchAll();
-
-    // Se $idClube não for nulo, buscar as informações do clube
-    $clubeDAO = new ClubeDAO();
-    $clube = $clubeDAO->findById($idClube);
-
     // Criar um objeto Jogador e atribuir o clube a ele
     $jogador = new Jogador();
     $jogador->setNomeJogador($nomeJogador);
@@ -55,8 +42,13 @@ if (isset($_POST['submetido'])) {
     $jogador->setPe($pe);
     $jogador->setPais($pais);
     $jogador->setPosicao($posicao);
-    $jogador->setClube($clube);
-    $jogador->setFoto($posicao);
+
+    if($idClube) {
+        $clube = new Clube();
+        $clube->setId($idClube);
+        $jogador->setClube($clube);
+    }
+    $jogador->setFoto($foto);
 
     // Agora você pode prosseguir com a inserção do jogador
     $jogadorCont = new JogadorController();

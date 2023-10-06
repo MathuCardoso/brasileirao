@@ -189,7 +189,7 @@ $estadios = $estadioCont->listar();
 
                 if (!$divisao) {
                     echo "<p class='mb-0 fw-bold text-danger'>Divisão do clube:</p>";
-                } elseif ($Estadio) {
+                } elseif ($divisao) {
                     echo "<p class='mb-0 fw-bold text-success'>Divisão do clube:</p>";
                 }
             } else echo "Divisão do clube";
@@ -213,7 +213,7 @@ $estadios = $estadioCont->listar();
         </select>
     </div>
 
-    <input type="hidden" name="id" value="<?php echo ($jogador ? $jogador->getId() : 0); ?>" />
+    <input type="hidden" name="id" value="<?php echo ($clube ? $clube->getId() : 0); ?>" />
     <input type="hidden" name="submetido" value="1">
 
     <div class="row mt-3">

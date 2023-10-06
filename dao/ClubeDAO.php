@@ -55,7 +55,7 @@ class ClubeDAO
             $clube->getTecnico(),
             $clube->getPresidente(),
             $clube->getDivisao(),
-            $clube->getEstadio(),
+            $clube->getSede(),
             $clube->getEstadio()->getId(),
             $clube->getCor1(),
             $clube->getCor2(),

@@ -17,7 +17,8 @@ $clubes = $clubeCont->listar();
     }
 </style>
 
-<form id="formJogador" method="POST" class="row g-3 mt-2 needs-validation">
+<form id="formJogador" method="POST" class="row g-3 mt-2 needs-validation"
+    enctype="multipart/form-data">
 
     <!--Nome do Jogador-->
     <div class="col-md-6">
@@ -25,11 +26,9 @@ $clubes = $clubeCont->listar();
             <?php
             if (isset($_POST['submetido'])) {
 
-                if (!$nomeJogador) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Nome do jogador:</p>";
-                } elseif (strlen($nomeJogador) <= 2) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Isso é realmente um nome?</p>";
-                } elseif ($nomeJogador) {
+                if (isset($erros['nomeJogador'])) {
+                    echo "<p class='mb-0 fw-bold text-danger'>" . $erros['nomeJogador'] . "</p>";
+                } else {
                     echo "<p class='mb-0 fw-bold text-success'>$nomeJogador</p>";
                 }
             } else echo "Nome do jogador:";
@@ -44,8 +43,8 @@ $clubes = $clubeCont->listar();
             <?php
             if (isset($_POST['submetido'])) {
 
-                if (!$nomeUniforme) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Nome no uniforme:</p>";
+                if (isset($erros['nome_uniforme'])) {
+                    echo "<p class='mb-0 fw-bold text-danger'>" . $erros['nome_uniforme'] . "</p>";
                 } elseif ($nomeUniforme) {
                     echo "<p class='mb-0 fw-bold text-success'>$nomeUniforme</p>";
                 }
@@ -61,12 +60,8 @@ $clubes = $clubeCont->listar();
             <?php
             if (isset($_POST['submetido'])) {
 
-                if (!$altura) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Altura:</p>";
-                } elseif ($altura < 140) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Jogador baixo de mais.</p>";
-                } elseif ($altura > 220) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Jogador alto de mais.</p>";
+                if (isset($erros['altura'])) {
+                    echo "<p class='mb-0 fw-bold text-danger'>" . $erros['altura'] . "</p>";
                 } elseif ($altura) {
                     echo "<p class='mb-0 fw-bold text-success'>" . $altura . "cm" . "</p>";
                 }
@@ -124,15 +119,12 @@ $clubes = $clubeCont->listar();
             <?php
             if (isset($_POST['submetido'])) {
 
-                if (!$numero) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Número:</p>";
-                } elseif ($numero < 1 || $numero > 99) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Números entre 1 e 99.</p>";
-                } elseif (count($camisaIgual) > 0) {
-                    echo "<p class='mb-0 fw-bold text-danger'>Escolha outro número.</p>";
-                } elseif ($numero) {
-                    echo "<p class='mb-0 fw-bold text-success'>Camisa $numero</p>";
+                if (isset($erros['numero'])) {
+                    echo "<p class='mb-0 fw-bold text-danger'>" . $erros['numero'] . "</p>";
                 }
+                
+                else
+                    echo "<p class='mb-0 fw-bold text-success'>Camisa $numero</p>";
             } else echo "Número";
             ?></label>
         <br>
@@ -253,6 +245,7 @@ $clubes = $clubeCont->listar();
     </div>
 
     <input type="hidden" name="id" value="<?php echo ($jogador ? $jogador->getId() : 0); ?>" />
+    <input type="hidden" name="fotoValor" value="<?php echo ($jogador ? $jogador->getFoto() : ""); ?>" />
 
     <input type="hidden" name="submetido" value="1">
 

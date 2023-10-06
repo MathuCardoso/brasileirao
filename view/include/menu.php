@@ -21,9 +21,6 @@ require_once(__DIR__ . "/../../util/config.php");
                     <a class="dropdown-item text-black" href="<?= BASE_URL ?>/view/clubes/listar.php">Clubes</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#">Sobre</a>
-            </li>
         </ul>
     </div>
 </nav>

@@ -26,6 +26,7 @@ if(isset($_POST['submetido'])) {
     $idClube = trim($_POST['id_clube']) ? trim($_POST['id_clube']) : null;
 
     $idJogador = $_POST['id'];
+    $foto = $_POST['fotoValor'];
     
     //Criar um objeto jogador para persistência
     $jogador = new Jogador();
@@ -38,22 +39,14 @@ if(isset($_POST['submetido'])) {
     $jogador->setPeso($peso);
     $jogador->setPe($pe);
     $jogador->setPais($pais);
-    $jogador->setPosicao($posicao);~
+    $jogador->setPosicao($posicao);
 
-    
-    $sql = 'SELECT j.*
-    FROM jogadores j
-    WHERE j.numero = :numero
-    AND j.id_clube = :id_clube;';
-    $stmt = Connection::getConnection()->prepare($sql);
-    $stmt->bindParam(':numero', $numero, PDO::PARAM_INT);
-    $stmt->bindParam(':id_clube', $idClube, PDO::PARAM_INT);
-    $stmt->execute();
-    $camisaIgual = $stmt->fetchAll();
-
-    $clube = new Clube();
-    $clube->setId($idClube);
-    $jogador->setClube($clube);
+    if($idClube) {
+        $clube = new Clube();
+        $clube->setId($idClube);
+        $jogador->setClube($clube);
+    }
+    $jogador->setFoto($foto);
 
     //Criar um jogadorController 
     $jogadorCont = new JogadorController();

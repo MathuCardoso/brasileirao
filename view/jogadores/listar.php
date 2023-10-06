@@ -29,15 +29,15 @@ require(__DIR__ . "/../../view/include/header.php");
     <?php foreach ($jogadores as $j) : ?>
 
 
-        <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-jogadores" style="max-width: 540px; border: 5px solid black;">
+        <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-jogadores" style="max-width: 540px; border: 5px solid black; height: max-content;">
             <div class="row pr-0">
                 <div class="col-md-4">
-                    <img class="mt-4 p-3" style="width: 100%;" src="<?php
+                    <img class="mt-4 p-3" style="width: 151px; height: 151px; border-radius: 50%;" src="<?php
 
-                    if ($j->getFoto()) {
-                        echo $f->getFoto();
+                    if ($j->getFoto() and $j->getFoto() != "./img/") {
+                        echo $j->getFoto();
                     } else {
-                        echo "./../../assets/74472.png";
+                        echo "../../assets/74472.png";
                     }
                     ?>" class="img-fluid rounded-start">
                     <div class="outros text-center ">

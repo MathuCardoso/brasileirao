@@ -30,6 +30,8 @@ class JogadorController {
         if($erros) 
             return $erros;
 
+        //return array("fdsafs" => '1');
+
         //Persiste o objeto e retorna um array vazio
         $this->jogadorDAO->insert($jogador);
         return array();

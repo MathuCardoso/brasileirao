@@ -11,7 +11,7 @@ $clubes = $clubeCont->listar();
 ?>
 
 <?php 
-require(__DIR__ . "/../include/header.php");
+require_once(__DIR__ . "/../include/header.php");
 ?>
 
 <h2 class="mt-4 text-center">Listagem de clubes</h2>
@@ -30,10 +30,10 @@ require(__DIR__ . "/../include/header.php");
                 <div class="col-md-4 px-0" style="text-align: center; display: flex; justify-content: center; align-items: center; flex-direction: column;">
                     <img class="mt-4 p-3" style="width: 100%;" src="<?php
 
-                    if($c->getEscudo()){
-                        echo$c->getEscudo();
-                    }else{
-                        echo "./../../assets/74472.png";
+                    if ($c->getEscudo() and $c->getEscudo() != "./img/") {
+                        echo $c->getEscudo();
+                    } else {
+                        echo "../../assets/74472.png";
                     }
                     ?>" class="img-fluid rounded-start">
                     <div class="outros text-center mt-3">

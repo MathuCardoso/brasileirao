@@ -1,4 +1,4 @@
-<?php
+!<?php
 //Modelo para Estádios
 class Estadio {
 
