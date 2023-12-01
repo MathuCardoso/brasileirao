@@ -1,15 +1,26 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 require_once(__DIR__ . "/../../controller/LoginController.php");
+
+$msgErro = '';
+$usuario = "";
+$senha = "";
 
     if(isset($_POST['submetido'])){
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
 
         $loginCont = new LoginController();
-        $loginCont->logar($usuario, $senha);
+        $erros = $loginCont->logar($usuario, $senha);
 
-        echo $usuario . " - " . $senha;
+        if(! $erros) {
+            header("location: " . BASE_URL);
+            exit;
+        }
+
+        $msgErro = implode("<br>", $erros);
     }
 ?>
 
@@ -48,18 +59,26 @@ require_once(__DIR__ . "/../../controller/LoginController.php");
                 <form method="post">
                     <div class="form-gorup">
                         <label for="txtUsuario">Usuário</label>
-                        <input type="text" id="txtUsuario" class="form-control" name="usuario">
+                        <input type="text" id="txtUsuario" class="form-control" name="usuario" value="<?php echo $usuario; ?>">
                     </div>
 
                     <div class="form-gorup">
                         <label for="txtSenha">Senha</label>
-                        <input type="password" id="txtSenha" class="form-control" name="senha">
+                        <input type="password" id="txtSenha" class="form-control" name="senha" value="<?php echo $senha ?>">
                     </div>
 
                         <input type="hidden" name="submetido">
                         <button class="btn btn-success">Enviar</button>
                 </form>
 
+            </div>
+
+            <div class="col-6">
+                <?php if($msgErro): ?>
+                <div class="alert alert-danger">
+                    <?= $msgErro ?>
+                    <?php endif; ?>
+                </div>
             </div>
 
         </div>

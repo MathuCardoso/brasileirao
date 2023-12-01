@@ -1,5 +1,11 @@
 <?php
 require_once(__DIR__ . "/../../util/config.php");
+require_once(__DIR__ . "/../../controller/LoginController.php");
+
+
+$loginCont = new LoginController();
+$nomeUsuario = $loginCont->getNomeUsuario();
+
 ?>
 <nav class="navbar navbar-expand-md navbar-light bg-primary">
     <a class="navbar-brand fs-3" href="<?= BASE_URL ?>/index.php">Brasileirão 2023</a>
@@ -21,6 +27,14 @@ require_once(__DIR__ . "/../../util/config.php");
                     <a class="dropdown-item text-black" href="<?= BASE_URL ?>/view/clubes/listar.php">Clubes</a>
                 </div>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-black" href="#" id="navDropDown" data-toggle="dropdown"><?php echo $nomeUsuario; ?></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-black" href="<?= BASE_URL ?>/view/login/sair.php">Sair</a>
+                </div>
+            </li>
+
         </ul>
     </div>
 </nav>

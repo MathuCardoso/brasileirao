@@ -31,7 +31,7 @@ $clubes = $clubeCont->listar();
                 } else {
                     echo "<p class='mb-0 fw-bold text-success'>$nomeJogador</p>";
                 }
-            } else echo "Nome do jogador:";
+            } else echo "Nome e sobrenome do jogador:";
             ?></label>
         <br>
         <input placeholder="Nome completo do jogador" type="text" name="nomeJogador" class="form-control fs-5" id="txtNomeJogador" value="<?php echo ($jogador ? $jogador->getNomeJogador() : ''); ?>" />
