@@ -248,6 +248,7 @@ $clubes = $clubeCont->listar();
     <input type="hidden" name="fotoValor" value="<?php echo ($jogador ? $jogador->getFoto() : ""); ?>" />
 
     <input type="hidden" name="submetido" value="1">
+    <input type="hidden" id="hddBaseUrl" value="<?= BASE_URL ?>" />
 
     <button type="submit" class="btn btn-success col-md-4 mx-auto fs-5">Cadastrar</button>
     <button type="reset" class="btn btn-info col-md-3 mx-auto fs-5">Limpar</button>
@@ -258,4 +259,6 @@ $clubes = $clubeCont->listar();
 <br><br>
 
 
-<?php require_once(__DIR__ . "/../include/footer.php"); ?>
+<?php require_once(__DIR__ . "/../include/footer.php"); 
+?>
+

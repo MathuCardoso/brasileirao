@@ -70,7 +70,6 @@ class JogadorDAO
         $stmt->execute([$id]);
     }
 
-    //fazer essa parte
 
     public function list()
     {
@@ -78,6 +77,18 @@ class JogadorDAO
             " FROM jogadores j" .
             " JOIN clubes c ON (c.id = j.id_clube)" .
             " ORDER BY j.id_clube";
+        $stm = $this->conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+        return $this->mapBancoParaObjeto($result);
+    }
+
+    public function listarPorNumero()
+    {
+        $sql = "SELECT j.*, c.nome_clube" .
+        " FROM jogadores j" .
+        " LEFT JOIN clubes c ON (c.id = j.id_clube)" .
+        " ORDER BY j.numero";
         $stm = $this->conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();

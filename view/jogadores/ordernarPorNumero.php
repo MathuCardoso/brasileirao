@@ -1,36 +1,23 @@
 <?php
-//Página view para listagem de alunos
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Conteúdo do arquivo ordenar_por_numero.php
 
+// Inclua as configurações necessárias, como o controller e outras dependências
 require_once(__DIR__ . "/../../controller/JogadorController.php");
 
+// Instancie o controlador de jogadores
 $jogadorCont = new JogadorController();
-$jogadores = $jogadorCont->listar();
-//print_r($jogadores);
+
+// Obtenha a lista ordenada de jogadores por número
+$jogadoresOrdenados = $jogadorCont->listNumber();
+
+// Renderize a lista de jogadores (você pode usar o mesmo código da listagem original)
 
 ?>
-
-<?php
-require(__DIR__ . "/../../view/include/header.php");
-?>
-
-<h2 class="mt-4 text-center">Listagem de jogadores</h2>
-
-<div>
-    <a class="btn btn-primary mt-1 mb-3" href="inserir.php">Cadastrar jogador</a>
-</div>
-
-<div class="">
-    <!-- Adicione o botão -->
-<button class="btn btn-secondary mt-1 mb-3" id="ordenarPorNumero">Ordenar por Número</button>
-
-</div>
 
 <div class="row">
 
-    <?php foreach ($jogadores as $j) : ?>
+    <?php foreach ($jogadoresOrdenados as $j):
+ ?>
 
 
         <div class="card mb-3 mx-auto p-2 rounded-4 text-bg-dark card-jogadores" style="max-width: 540px; border: 5px solid black; height: max-content;">
@@ -77,8 +64,3 @@ require(__DIR__ . "/../../view/include/header.php");
     <?php endforeach; ?>
 </div>
 
-<script src="./js/listarNumero.js"></script>
-
-<?php
-require(__DIR__ . "/../include/footer.php");
-?>

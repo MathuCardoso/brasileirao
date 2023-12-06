@@ -20,6 +20,10 @@ class JogadorController {
         return $this->jogadorDAO->list();        
     }
 
+    public function listNumber() {
+        return $this->jogadorDAO->listarPorNumero();        
+    }
+
     public function buscarPorId(int $id) {
         return $this->jogadorDAO->findById($id);
     }
